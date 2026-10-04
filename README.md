@@ -71,7 +71,7 @@ These go to small children. Keep the hole plugs away from babies (glue them in o
 off), never squeeze a lithium pouch cell, don't install one that's puffed or damaged, check the
 battery plug's polarity before connecting it, and don't leave it charging unattended.
 
-## What's in this folder
+## What's in this repo
 
 | File | What it is |
 |---|---|
@@ -83,3 +83,11 @@ battery plug's polarity before connecting it, and don't leave it charging unatte
 | `renders/` | Every image in these guides, and `make_renders.sh` to regenerate them |
 | `photos/` | The real unit |
 | `reference/` | Archived Waveshare drawings, 3D model, schematic and web pages ([reference/README.md](reference/README.md)) |
+| `LICENSE` | CC BY-SA 4.0, below |
+
+## License
+
+The design (the model, STLs, renders, guides and photos) is licensed under
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/): print it, share it, sell prints,
+or remix it, as long as you credit this repo and share remixes under the same license. The
+files in `reference/` are Waveshare's, kept unmodified for reference, and are not covered.
