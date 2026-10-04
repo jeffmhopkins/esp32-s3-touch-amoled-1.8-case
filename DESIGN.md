@@ -171,11 +171,12 @@ all (OpenSCAD 2021+; on a headless machine it uses `xvfb-run`). The figure sourc
 
 The photoreal shots on the README, `renders/hero-<plate|stand>-<orange|black>.jpg`, come from
 `renders/photoreal/make_photoreal.sh` instead: Blender (Cycles, as the `bpy` module) renders
-the printed parts exported from the model, Waveshare's STEP of the board and panel (downloaded and
-checksummed), and a pet frame drawn by the firmware's own `face.c`. The STEP has no case, so the
-black front shell in those shots is drawn from the case outline and the [photos](#screws): the
-board hangs on standoffs that end at the seam (taken as 4 mm), which puts the glass just under
-the shell's face. It takes about 25 minutes on four cores and needs `python3.11`; re-run it only
+the printed parts exported from the model, Waveshare's STEP of the board and panel (the copy in
+`reference/`, checksummed), and a pet frame drawn by the JBrain2 firmware's `face.c` (saved in
+`renders/photoreal/screens/`; set `FIRMWARE` to a firmware checkout to redraw it). The STEP has
+no case, so the black front shell in those shots is drawn from the case outline and the
+[photos](#screws): the board hangs on standoffs that end at the seam (taken as 4 mm), which puts
+the glass just under the shell's face. It takes about 25 minutes on four cores and needs `python3.11`; re-run it only
 when a change shows from outside.
 
 ## Photos of the real unit

@@ -4,7 +4,8 @@
 
 A 3D-printable back cover for the [Waveshare
 ESP32-S3-Touch-AMOLED-1.8](https://www.waveshare.com/esp32-s3-touch-amoled-1.8.htm), the little
-touchscreen that runs the kids' pet (firmware in [`../../firmware/`](../../firmware/README.md)).
+touchscreen that runs the kids' pet (firmware in
+[JBrain2](https://github.com/jeffmhopkins/JBrain2/tree/main/firmware)).
 The stock back only fits a tiny battery. This one is a deeper box that holds a real one, screws on
 with the original four screw positions, and has grip ribs so small hands don't drop it.
 
