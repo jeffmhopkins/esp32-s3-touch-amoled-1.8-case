@@ -1,6 +1,6 @@
 # Adjusting the model
 
-> **Status:** Living · **Last verified:** 2026-09-23
+> **Status:** Living · **Last verified:** 2026-10-06
 
 How to change the plate: another battery, a better fit to the case, a different grip. You never
 edit code — every number is a labelled field in a form (the one exception is noted under the desk
@@ -156,12 +156,30 @@ source; measuring them on the original black cover makes a keeper fit first time
 
 ## Desk stand
 
-Pick **Desk stand: head** or **Desk stand: box for …** from the preset drop-down, or tick
-`desk_stand` (group 7) on any version. `part` then chooses the piece: `plate` gives the **head**,
-`box` the **box**, and `stand` shows both put together (for looking at, not exporting). The
-battery fields (group 1) work exactly as for the plate: set your cell and orientation, and the box
-grows to fit it. `show_battery` ghosts it in the box. The head doesn't depend on the battery, so
-one head fits every box.
+Pick **Desk stand: head (fits every box)**, **Desk stand: head, no collar** or **Desk stand:
+box for …** from the preset drop-down, or tick `desk_stand` (group 7) on any version. `part`
+then chooses the piece: `plate` gives the **head**, `box` the **box**, and `stand` shows both
+put together (for looking at, not exporting). The battery fields (group 1) work exactly as for
+the plate: set your cell and orientation, and the box grows to fit it. `show_battery` ghosts it
+in the box. The head doesn't depend on the battery, so one head fits every box.
+
+### The head presets
+
+The boxes are built from the model's defaults. The two head presets change a few fields on top,
+for a snugger head that fits those same boxes ([DESIGN.md](DESIGN.md#the-collar-head) says why):
+
+| Field | Default | Head presets | Effect |
+|---|---|---|---|
+| `lip_h` | 2.0 | 1.5 | A shorter rim, so it doesn't hold the front shell up |
+| `stock_clear` | 3.9 | 3.4 | Drops with `lip_h`, so the part of the head in the box stays 3.5 mm |
+| `tower_drop` | 2.0 | 2.0 | With the shorter rim, the tower tops now stop 0.5 mm below the seam |
+| `pocket_clear`, `lip_slop` | 0.15 | 0.05 | Tighter gaps to the box and inside the shell |
+| `lock_pad`, `stand_ledge` | 1.0 | 1.1 | On the head these only deepen its lock-pad notches, to match the wider head |
+| `lock_block_join` | off | on | Joins each lock block to its nearest tower |
+| `collar_h` | 0 | 3 (0 in "no collar") | The collar |
+
+Change head fields in a head preset, and box fields in a box preset. Don't copy the head's
+`lock_pad` or `stand_ledge` into a box preset: there they change the box's pads and ledge.
 
 ### The box
 
@@ -188,11 +206,11 @@ printed (on its floor): `end` makes the longest box, `flat` the shortest.
 | Field | What it is | Change it when |
 |---|---|---|
 | `pocket_wall` | The box's wall round the head at its rim, which the front shell sits on (0.8–1.3). The head is this much (plus `pocket_clear`) smaller than the case each side | Rarely. The default 1.1 is already the most the head's rim allows; go thinner only to give the head more room |
-| `pocket_clear` | Gap between the head and the box, each side (0.05–0.25) | Head won't go in: raise by 0.05. Rattles: lower |
+| `pocket_clear` | Gap between the head and the box, each side (0.05–0.25). The head presets use 0.05, the tightest | Head won't go in: raise by 0.05 in the head preset |
 | `stand_ledge` | Width of the step inside the box the head's back rests on | Wider is firmer but leaves less room for the battery (the 104050 box uses 0.8) |
 | `lock_spread` | Distance between the two lock screws on each side (0 = one per side, in the middle) | Rarely; 14 keeps them on the flat part of the side |
 | `lock_top_bottom` | One more lock screw in the top and one in the bottom, diagonally opposite so they miss the battery slot | Untick for side screws only |
-| `lock_pad` | How far the thicker pad at each lock screw reaches into a notch in the head's edge, at most `stand_ledge` (1.0) | 0 for no pads (then the screws seat in the 1.1 mm band alone) |
+| `lock_pad` | How far the thicker pad at each lock screw reaches into a notch in the head's edge, at most `stand_ledge` (1.0; the head presets use 1.1 so the notch matches the wider head) | 0 for no pads (then the screws seat in the 1.1 mm band alone) |
 | `collar_h` | A collar on the head between the box and the front shell (0 = none). The head grows this much taller and, above the box, widens to the case outline; the box doesn't change | To lift the board further above the lock blocks, or to print a coloured band that tells units apart |
 | `lock_block_join` | Fill between each lock block and its nearest screw tower, up to the block's top (off by default) | On, to get rid of the narrow V between a block and the tower's flare |
 
@@ -203,8 +221,10 @@ are.
 
 ### What the console tells you
 
-The head's size; the box's size as it lies on the table; the whole unit's size with the display
-on; the hex key reach; the room each side of the cell; and the screws to buy. The same `TIGHT` and
+The head's size; how far below the seam its tower tops and lock blocks stop, and the screw seat;
+the collar, if any; the box's size as it lies on the table; the whole unit's size with the display
+on; the room each side of the cell; and the screws to buy, with the display screws' length
+worked out for that head (M2 × 5 with the collar, M2 × 4 without). The same `TIGHT` and
 `DOES NOT FIT` warnings as the plate, and it refuses to export a box the cell doesn't fit.
 
 ### Measuring for the desk stand
@@ -214,5 +234,5 @@ on; the hex key reach; the room each side of the cell; and the screws to buy. Th
 | The front shell's outside, if it isn't flush with the box | The box's outside is the case outline: correct `plate_x`, `plate_y`, `plate_r` ([outline](#outline-and-screw-positions)) |
 | Where the board's `BAT` socket is, and which way its mouth faces | The head's slot sits just in front of it, taken from Waveshare's 3D model ([figure](renders/fig-stand-head.png)). If your board differs, the slot's position is in `head_holes()` in the `.scad` — the one place you'd edit code |
 
-Grip ribs (group 5b) go round the box too, clear of its angled end. The head has none: it's hidden
-inside the box.
+Grip ribs (group 5b) go round the box too, clear of its angled end. The head has none: it sits
+inside the box, and only its collar shows.

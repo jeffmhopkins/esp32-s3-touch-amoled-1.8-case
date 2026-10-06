@@ -1,6 +1,6 @@
 # Design notes
 
-> **Status:** Living · **Last verified:** 2026-10-04
+> **Status:** Living · **Last verified:** 2026-10-06
 
 How the plate is built, why, and where every number came from. You don't need this to print or
 adjust it. Back to the [README](README.md).
@@ -183,6 +183,10 @@ and the photos in `photos/`. Copies are kept in [`reference/`](reference/README.
 
 For reference: the stock unit is 15.0 mm thick; Waveshare's largest recommended cell for the
 stock case is 3.85 × 24 × 28 mm; the stock back label window is 27.6 × 27.6 mm, R1.8.
+
+The desk-stand head presets (`amoled18_stand_head.stl` and the no-collar head) go on from these
+defaults: a 1.5 mm rim and tower tops 0.5 mm below the seam, from fitting a second unit whose
+shell sat proud of the box on the defaults ([The collar head](#the-collar-head)).
 
 ## Regenerating the images
 

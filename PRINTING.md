@@ -1,6 +1,6 @@
 # Printing and assembly
 
-> **Status:** Living · **Last verified:** 2026-09-23
+> **Status:** Living · **Last verified:** 2026-10-06
 
 Everything from buying parts to a finished unit. Back to the [README](README.md).
 

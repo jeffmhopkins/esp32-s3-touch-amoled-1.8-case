@@ -1,6 +1,6 @@
 # Troubleshooting
 
-> **Status:** Living · **Last verified:** 2026-09-23
+> **Status:** Living · **Last verified:** 2026-10-06
 
 Something came out wrong? Find it below. Each fix names the field to change in OpenSCAD —
 [MODEL_ADJUSTMENT.md](MODEL_ADJUSTMENT.md) shows how to open the model, change a field and export.
@@ -77,8 +77,13 @@ Back to the [README](README.md).
 | **…and suggests a lower `stand_angle`** | A wide cell doesn't fit at a big lean | Lower `stand_angle` |
 | **Console says `RIM IS LARGER THAN THE HEAD`** | `pocket_wall` + `pocket_clear` too big | Lower one of them |
 | **Head won't drop into the box** | Opening printed small, or a pad catching its notch | Check the six notches line up with the pads (the head goes in either way round); raise `pocket_clear` by 0.05 and print again |
-| **Head rattles in the box** | Opening printed big | Lower `pocket_clear` by 0.05; the rim screws hold it anyway |
+| **Head rattles in the box** | Opening printed big | The head presets already use the tightest `pocket_clear` (0.05); check the box's flow and wall settings. The rim screws hold it anyway |
 | **Front shell stands proud of the box** | Head not right down on the ledge | Check nothing (foam, wire) is under the head's back; thinner foam |
+| **…with the head right down, a strip of it showing under the shell** | The board's standoffs reach past the shell's edge and land on the tower tops first | Measure the gap and raise `tower_drop` by that much in the head preset; the lock blocks drop with the towers |
+| **…and the head's rim touches the inside of the shell first** | Rim taller than the shell's inside step | Lower `lip_h` and `stock_clear` by the same amount, and `tower_drop` with them |
+| **Front shell won't press onto the head's rim** | Rim a little big for this shell | Raise `lip_slop` to 0.1 in the head preset |
+| **Display screws don't bite, or bottom out** | Wrong length for the head | M2 × 5 for the collar head, M2 × 4 for the head without a collar; the console's `SCREWS` line gives it |
+| **Underside of the collar droops** | The overhang (up to 1.2 mm) printed hot | More part cooling, or slow the first layers above it; it's hidden against the box's rim |
 | **Front shell overhangs the box, or the box sticks out** | The case outline differs from the drawing | Measure the stock cover and correct `plate_x`, `plate_y`, `plate_r` |
 | **Head sits proud, rocking on the battery** | Foam too thick, or the cell is bigger than entered | Thinner foam; measure the cell and enter it, which makes the box longer |
 | **Plug won't go through the slot** | A bigger plug than the usual MX1.25 | Open the slot with a file; the plug only has to pass once |
