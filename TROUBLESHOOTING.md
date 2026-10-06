@@ -92,7 +92,7 @@ Back to the [README](README.md).
 | **Lock screw won't bite** | Its hole in the head is too big, or the screw is shorter than 8 mm | Use M2 × 8; a drop of glue in the hole |
 | **Lock screw won't go in** | Its hole in the head is too small | Open it with a 1.5 mm drill |
 | **Lock screw head stands proud** | Countersink printed small, or a pan-head screw | Use countersunk (flat head) screws; clean the seat with a countersink bit or a 5 mm drill turned by hand |
-| **The band round the box's angled end is broken or missing at its corners** | A box from before the corners were widened: the band was only 0.3 mm thick there | Reprint the box from the current files (0.9 mm at its thinnest); raise `pocket_corner_min` if it still breaks |
+| **The band round the box's angled end is broken or missing at its corners** | A box from before the corners were widened: the band was only 0.3 mm thick there | Reprint the box from the current files: the band is now 1.1 mm all the way round |
 | **The band round the box's angled end cracks at a lock screw** | Screw overtightened | Snug only; print the box with more walls |
 | **USB-C and buttons end up at the bottom** | Head in the box the wrong way round | The USB-C side goes to the box's short wall, away from the long flat side it lies on |
 | **Screen leans back too much or too little** | Taste | `stand_angle`, 10–45° |

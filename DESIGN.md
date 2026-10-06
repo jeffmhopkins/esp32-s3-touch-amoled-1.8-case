@@ -97,10 +97,11 @@ below (the model's defaults, which the boxes are built from); see
 
 - **The head** is the plate at stock depth (5.5 mm) with no battery room: same rim, same four
   towers, so it fits the front shell exactly as the stock cover does. It is smaller than the case
-  by the box's rim wall, with corners tighter than the case's. They're rounded just enough that
-  the box's band keeps 0.9 mm at its thinnest, on the corner's diagonal
-  (`pocket_corner_min`), which still leaves about 0.9 mm of wall outside each screw bore.
-  Tighter corners pinched the band to 0.3 mm there, too thin to print. It adds a solid block for each lock screw inside its short ends (left and right in
+  by the box's rim wall, with corners that follow the case's: the box's opening is the case outline
+  offset in by the band's width, so the band is the same 1.1 mm all the way round, corners
+  included. (Tighter head corners pinched the band to 0.3 mm at each corner, too thin to
+  print.) That leaves 0.83 mm of wall outside each screw bore in the head, with the head
+  presets' slightly tighter bore (`head_clear` 0.4). It adds a solid block for each lock screw inside its short ends (left and right in
   use), and a slot through the floor just in front of the board's `BAT` socket, whose mouth faces
   the slot (from Waveshare's 3D model). The socket is on the side away from the USB-C, which fixes
   which way round the head goes. Its back edge has no chamfer, so all of it bears on the ledge,
