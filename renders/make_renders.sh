@@ -52,16 +52,19 @@ echo "Desk stand (as it sits on the table: box on its long flat side, screen fac
 B1="Desk stand: box for 103035 on edge"
 B2="Desk stand: box for 802525 flat"
 B3="Desk stand: box for 104050 on end (tight, measure first)"
+# The head drawn on the boxes is the recommended one, with the collar ("Desk stand: head,
+# Allan fitment with collar"); the boxes themselves are the same with either head.
+HEAD="-D lip_h=1.5 -D tower_drop=2.0 -D pocket_clear=0.05 -D lip_slop=0.05 -D stock_clear=3.4 -D stand_ledge=1.1 -D lock_pad=1.1 -D lock_block_join=true -D collar_h=3"
 sec="--projection=o --imgsize=900,700"
-run stand-back.png src/fig_stand.scad --imgsize=900,700 --camera=35,0,25,55,0,35,240 -p "$PRESETS" -P "$B1" -D 'view="exploded"'
-run stand-section-103035.png src/fig_stand.scad $sec --camera=35,0,20,90,0,0,150 -p "$PRESETS" -P "$B1" -D 'view="section"'
-run stand-section-802525.png src/fig_stand.scad $sec --camera=30,0,20,90,0,0,140 -p "$PRESETS" -P "$B2" -D 'view="section"'
-run stand-section-104050.png src/fig_stand.scad $sec --camera=45,0,20,90,0,0,190 -p "$PRESETS" -P "$B3" -D 'view="section"'
+run stand-back.png src/fig_stand.scad --imgsize=900,700 --camera=35,0,25,55,0,35,240 -p "$PRESETS" -P "$B1" -D 'view="exploded"' $HEAD
+run stand-section-103035.png src/fig_stand.scad $sec --camera=35,0,20,90,0,0,150 -p "$PRESETS" -P "$B1" -D 'view="section"' $HEAD
+run stand-section-802525.png src/fig_stand.scad $sec --camera=30,0,20,90,0,0,140 -p "$PRESETS" -P "$B2" -D 'view="section"' $HEAD
+run stand-section-104050.png src/fig_stand.scad $sec --camera=45,0,20,90,0,0,190 -p "$PRESETS" -P "$B3" -D 'view="section"' $HEAD
 run stand-box-top.png "$MODEL" --imgsize=900,700 --camera=0,0,24,35,0,250,200 -p "$PRESETS" -P "$B1"
-run fig-stand-side.png src/fig_stand_side.scad --projection=o --imgsize=1400,1000 --camera=36,0,22,90,0,0,215 -p "$PRESETS" -P "$B1"
-run fig-stand-joint.png src/fig_stand_joint.scad --projection=o --imgsize=1300,900 --camera=0,21.5,1.6,90,0,90,52 -p "$PRESETS" -P "$B1"
-run fig-stand-head.png src/fig_stand_head.scad --projection=o --imgsize=1500,1000 --camera=0,2,0,30,0,0,265 -p "$PRESETS" -P "$B1"
-run stand-print-bed.png src/fig_stand_print.scad --imgsize=1000,700 --camera=-15,0,10,50,0,15,260 -p "$PRESETS" -P "$B1"
+run fig-stand-side.png src/fig_stand_side.scad --projection=o --imgsize=1400,1000 --camera=36,0,22,90,0,0,215 -p "$PRESETS" -P "$B1" $HEAD
+run fig-stand-joint.png src/fig_stand_joint.scad --projection=o --imgsize=1300,900 --camera=0,21.5,3.0,90,0,90,58 -p "$PRESETS" -P "$B1" $HEAD
+run fig-stand-head.png src/fig_stand_head.scad --projection=o --imgsize=1500,1000 --camera=0,2,0,30,0,0,265 -p "$PRESETS" -P "$B1" $HEAD
+run stand-print-bed.png src/fig_stand_print.scad --imgsize=1000,700 --camera=-15,0,10,50,0,15,260 -p "$PRESETS" -P "$B1" $HEAD
 
 echo "Allan fitment (stock head vs the snug head, in the unchanged 103035 box)"
 openscad -o src/allan_box_slice.stl -p "$PRESETS" -P "$B1" src/fig_allan_box_slice.scad 2>&1 | grep -iE "warning|error" || true

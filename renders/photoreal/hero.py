@@ -72,8 +72,12 @@ def pla(color, rough):
 
 
 # Filament: base colour and roughness. Black prints a touch glossier than a pigmented colour.
-FILAMENTS = {"orange": ((0.86, 0.20, 0.07), 0.48), "black": ((0.03, 0.03, 0.032), 0.40)}
+FILAMENTS = {"orange": ((0.86, 0.20, 0.07), 0.48), "black": ((0.03, 0.03, 0.032), 0.40),
+             "teal": ((0.02, 0.38, 0.40), 0.48)}
 mat_pla = pla(*FILAMENTS[colour])
+# The stand's head can print in a second filament (HEAD_COLOUR), so its collar shows.
+import os
+mat_head = pla(*FILAMENTS[os.environ["HEAD_COLOUR"]]) if os.environ.get("HEAD_COLOUR") else mat_pla
 mat_shell, _ = principled("Shell", (0.012, 0.012, 0.013), 0.42)
 mat_buttons, _ = principled("Buttons", (0.05, 0.05, 0.055), 0.6)
 mat_glass, glass_bsdf = principled("Glass", (0.004, 0.004, 0.005), 0.04)
@@ -111,7 +115,7 @@ if shot == "plate":
 else:
     seam = poses["marker_seam"]
     stl("box", mat_pla, poses["marker_box"])
-    stl("plate", mat_pla, poses["marker_head"])
+    stl("plate", mat_head, poses["marker_head"])
     stl("screws", mat_metal, poses["marker_box"])
 stl("shell", mat_shell, seam)
 stl("buttons", mat_buttons, seam)

@@ -88,7 +88,8 @@ the hex driver needs a 60 mm shaft.
 ![The desk stand from the side](renders/fig-stand-side.png)
 
 Two parts, so the box stays a plain box and the part that meets the display stays the stock
-cover's shape:
+cover's shape. The recommended head adds a collar and a few fit changes to what's described
+below; see [The collar head](#the-collar-head) at the end of this section.
 
 - **The head** is the plate at stock depth (5.5 mm) with no battery room: same rim, same four
   towers, so it fits the front shell exactly as the stock cover does. It is smaller than the case
@@ -136,6 +137,26 @@ cover's shape:
   pads also key the head into the box before it's screwed.
 
 ![The head from inside, with the BAT socket ghosted](renders/fig-stand-head.png)
+
+
+### The collar head
+
+The recommended head (`amoled18_stand_head_allan_fitment_collar.stl`, preset **Desk stand:
+head, Allan fitment with collar**) is the head above with these changes. Each one came from
+fitting a stand on a second unit; [ALLAN_FITMENT.md](ALLAN_FITMENT.md) has the story and the
+before and after cuts.
+
+- **A 3 mm collar** (`collar_h`). Above the box's band the head widens to the case outline,
+  so the box, collar and front shell are flush. The part in the box (`pocket_h`) is unchanged,
+  so the boxes are too.
+- **Tower tops 0.5 mm below the seam** (`tower_drop` = `lip_h` + 0.5), so standoffs that reach
+  past the shell's edge can't hold it up. The screw seat stays 2 mm thanks to the collar, and
+  the screws become M2 × 5.
+- **Lock blocks stay in the box** (they stop at `pocket_h`), 3 mm below the seam, and join
+  their nearest tower (`lock_block_join`) so there's no narrow V between them.
+- **A 1.5 mm rim** (`lip_h`; `stock_clear` drops with it so the part in the box stays 3.5 mm).
+- **0.05 mm gaps** to the box and inside the shell (`pocket_clear`, `lip_slop`), with the
+  lock-pad notches 0.1 mm deeper (`lock_pad`, `stand_ledge` 1.1) to match.
 
 ## Where the numbers come from
 

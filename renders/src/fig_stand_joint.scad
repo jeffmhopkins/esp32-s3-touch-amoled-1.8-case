@@ -12,7 +12,9 @@ color("SteelBlue") render() slice() multmatrix(m_inv) stand_box();
 color("LightSteelBlue") render() slice() back_plate();
 // Front shell (estimated), sitting on the band round the box's angled end.
 color("LightGray") translate([lx - 0.1, plate_y / 2 - 1.3, body_h]) cube([0.3, 1.3, 3.5]);
-label([x, 23.9, 5.8], "front shell (ghost)", v, t, "left", c = "DimGray");
+if (collar_h > 0)
+    label([x, 23.9, pocket_h + 2.2], str("collar ", collar_h, " (part of the head)"), v, t, "left", c = "DimGray");
+label([x, 23.9, body_h + 2.3], "front shell (ghost)", v, t, "left", c = "DimGray");
 // A countersunk screw, its head flush with the band's outer face; drawn just
 // in front of the cut so it shows.
 color("Goldenrod") translate([lx + 0.25, plate_y / 2, lock_z]) rotate([90, 0, 0]) {
@@ -23,8 +25,9 @@ callout([x, plate_y / 2 - 1.5, lock_z], [x, 23.9, -2.6], "M2 × 8 countersunk, f
 callout([x, 21.0, 2.8], [x, 16.0, 7.6], "pad (box) in a notch (head), 45° roof", v, t, "left");
 
 hy = head_y / 2;
-dim([x, hy + pocket_clear, body_h + 0.5], [x, plate_y / 2, body_h + 0.5], "", view = v);
-label([x, 22.1, body_h + 1.2], str("pocket_wall ", pocket_wall), v, t);
+dim([x, hy + pocket_clear, pocket_h + (collar_h > 0 ? -0.5 : 0.5)], [x, plate_y / 2, pocket_h + (collar_h > 0 ? -0.5 : 0.5)], "", view = v);
+if (collar_h > 0) label([x, 23.9, pocket_h + 0.8], str("pocket_wall ", pocket_wall, " (the box's band)"), v, t, "left");
+else label([x, 22.1, body_h + 1.2], str("pocket_wall ", pocket_wall), v, t);
 callout([x, hy + pocket_clear / 2, 2.6], [x, 23.9, 3.3], str("pocket_clear ", pocket_clear, " each side"), v, t, "left");
 dim([x, bhy, -0.35], [x, hy, -0.35], "", view = v);
 label([x, 19.6, -1.0], str("stand_ledge ", stand_ledge), v, t, "right");

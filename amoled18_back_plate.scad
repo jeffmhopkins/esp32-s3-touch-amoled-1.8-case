@@ -322,6 +322,9 @@ tower_top = total_h - tower_drop;
 // below the back face instead of standing proud of it.
 seat      = desk ? min(head_seat, tower_top - shaft_table[2] - 0.1) : head_seat;
 bore_top  = tower_top - seat;
+// A desk head's display screws: through the seat and any gap above the tower, then 2 mm
+// into the standoff, rounded up to a whole length.
+display_screw_l = ceil(seat + max(0, body_h - tower_top) + 2);
 
 // Clearances from the cell to each wall pair and to the nearest tower.
 side_gap  = (cav_x - fx) / 2;
@@ -410,7 +413,7 @@ if (desk) {
         echo(str("With the display:   ", unit_h, " long x ", 2 * p_out_y, " wide x ", unit_depth, " mm tall"));
         echo(str("Room around cell:   ", box_side_gap, " mm each side; it lies on the box's long flat side"));
     }
-    echo(str("SCREWS:             4 x ", screw_size, " x 4 socket head (display to head), ", lock_count, " x ",
+    echo(str("SCREWS:             4 x ", screw_size, " x ", display_screw_l, " socket head (display to head), ", lock_count, " x ",
              screw_size, " x 8 countersunk flat head, e.g. DIN 965 (head to box, flush)"));
     echo("-------------------------------------------");
     if (!rim_fits) echo("*** RIM IS LARGER THAN THE HEAD - lower pocket_wall or pocket_clear ***");

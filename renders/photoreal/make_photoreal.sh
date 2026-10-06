@@ -6,7 +6,8 @@
 # Heavy and optional: make_renders.sh does not call it, and a model change only needs it if the
 # change shows from outside. Needs python3.11 (bpy 4.2 is built for it), OpenSCAD 2021+, a C
 # compiler, and the network once for the two venvs, which go into $CACHE.
-# Usage: ./make_photoreal.sh   (from this folder; WIDTH and SAMPLES override 1600 and 256)
+# Usage: ./make_photoreal.sh   (from this folder; WIDTH and SAMPLES override 1600 and 256,
+#        SHOTS="stand" renders only the stand)
 #
 # The screen images in screens/ are the pet from the JBrain2 firmware
 # (https://github.com/jeffmhopkins/JBrain2/tree/main/firmware), one frame drawn by its face.c.
@@ -44,16 +45,19 @@ fi
 cp "$CACHE/module.glb" "$WORK/"
 
 echo "Parts (OpenSCAD)"
-export_part() {  # <shot> <preset> <which>
-  openscad -o "$WORK/$1/$3.stl" -p "$PRESETS" -P "$2" -D "which=\"$3\"" parts.scad 2>&1 \
+export_part() {  # <shot> <preset> <which> [extra openscad args]
+  openscad -o "$WORK/$1/$3.stl" -p "$PRESETS" -P "$2" -D "which=\"$3\"" "${@:4}" parts.scad 2>&1 \
     | grep -iE "warning|error" || true
 }
 PLATE="103035 1000mAh on edge (default)"
 STAND="Desk stand: box for 103035 on edge"
+# The stand's head is the recommended one, with the collar ("Desk stand: head, Allan fitment
+# with collar"); the box is the same with either head, so it comes from the box preset alone.
+HEAD=(-D lip_h=1.5 -D tower_drop=2.0 -D pocket_clear=0.05 -D lip_slop=0.05 -D stock_clear=3.4
+      -D stand_ledge=1.1 -D lock_pad=1.1 -D lock_block_join=true -D collar_h=3)
 for w in plate marker_plate shell buttons; do export_part plate "$PLATE" $w & done
-for w in plate box screws marker_box marker_head marker_seam shell buttons; do
-  export_part stand "$STAND" $w &
-done
+for w in box screws marker_box; do export_part stand "$STAND" $w & done
+for w in plate marker_head marker_seam shell buttons; do export_part stand "$STAND" $w "${HEAD[@]}" & done
 wait
 "$CACHE/tools/bin/python" marker.py "$WORK/plate/poses.json" "$WORK/plate/marker_plate.stl"
 "$CACHE/tools/bin/python" marker.py "$WORK/stand/poses.json" \
@@ -71,9 +75,14 @@ else
 fi
 
 echo "Rendering ($WIDTH px, $SAMPLES samples)"
-for shot in plate stand; do
+# The stand's head, collar and all, prints in a second colour so the collar shows: teal on the
+# orange box, orange on the black one.
+for shot in ${SHOTS:-plate stand}; do
   for colour in orange black; do
     out=hero-$shot-$colour
+    if [ $shot = stand ]; then
+      if [ $colour = orange ]; then export HEAD_COLOUR=teal; else export HEAD_COLOUR=orange; fi
+    else unset HEAD_COLOUR; fi
     "$CACHE/blender/bin/python" hero.py $shot $colour "$WORK" "$WORK/$out.png" "$WIDTH" "$SAMPLES" \
       2>&1 | grep -iE "error|traceback" || true
     "$CACHE/tools/bin/python" -c "import sys; from PIL import Image; \

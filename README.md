@@ -1,6 +1,6 @@
 # Deep back plate — ESP32-S3-Touch-AMOLED-1.8
 
-> **Status:** Living · **Last verified:** 2026-10-04
+> **Status:** Living · **Last verified:** 2026-10-06
 
 A 3D-printable back cover for the [Waveshare
 ESP32-S3-Touch-AMOLED-1.8](https://www.waveshare.com/esp32-s3-touch-amoled-1.8.htm), the little
@@ -34,27 +34,32 @@ a choking hazard**.
 
 | | |
 |---|---|
-| ![The recommended desk stand (103035 box) in orange: it lies on its side, the screen leans back 30°, USB-C and buttons along the top](renders/hero-stand-orange.jpg) | ![The same desk stand in black](renders/hero-stand-black.jpg) |
+| ![The recommended desk stand (103035 box) in orange with a teal head: it lies on its side, the screen leans back 30°, USB-C and buttons along the top, a teal collar between the box and the display](renders/hero-stand-orange.jpg) | ![The same desk stand, a black box with an orange head](renders/hero-stand-black.jpg) |
 
-A two-part version for a desk. A thin **head** screws to the display in place of the stock
-cover, then sinks right into the angled end of a plain **battery box**, held by six flush
-countersunk screws round its rim. The box's rim is the case outline, so the front shell sits
-flush on it and the head is hidden inside. The box lies on its long flat side, and the screen
-faces you, landscape, leaning back 30° from upright, with the USB-C and buttons along its top
-edge.
+A two-part version for a desk. A **head** screws to the display in place of the stock cover,
+then sinks into the angled end of a plain **battery box**, held by six flush countersunk
+screws round its rim. Above the box the head widens into a 3 mm **collar**, flush with the box
+and the front shell, so it shows as a band between them: print the head in a different colour
+for each unit to tell them apart. The box lies on its long flat side, and the screen faces you,
+landscape, leaning back 30° from upright, with the USB-C and buttons along its top edge.
 The head is the same for every box, so changing battery only means printing another box.
 
 | | [**103035, 1000 mAh**](renders/stand-section-103035.png) (recommended) | [802525, 400 mAh](renders/stand-section-802525.png) | [104050, 2400 mAh](renders/stand-section-104050.png) |
 |---|---|---|---|
 | | ![](renders/stand-section-103035.png) | ![](renders/stand-section-802525.png) | ![](renders/stand-section-104050.png) |
-| Print | `amoled18_stand_head.stl` + `amoled18_stand_box_103035_edge.stl` | head + `amoled18_stand_box_802525_flat.stl` | head + `amoled18_stand_box_104050_end.stl` |
+| Print | `amoled18_stand_head_allan_fitment_collar.stl` + `amoled18_stand_box_103035_edge.stl` | head + `amoled18_stand_box_802525_flat.stl` | head + `amoled18_stand_box_104050_end.stl` |
 | Box | 46 × 45 × 34 mm | 34 × 45 × 34 mm | 70 × 45 × 34 mm |
-| With the display on | 56 × 45 × 40 mm | 44 × 45 × 40 mm | 80 × 45 × 40 mm |
+| With the display on | 58 × 45 × 42 mm | 47 × 45 × 42 mm | 82 × 45 × 42 mm |
 | Notes | Roomy | Shortest | Tight fit — measure the cell first |
 
 Each is cut open as it sits on the table, you on the right: battery green, tape red, foam yellow.
 Sizes are front to back × left to right × height. How to print and assemble it:
 [PRINTING.md](PRINTING.md#desk-stand).
+
+The collar head came out of fitting a stand on a second unit: a snugger fit, a shorter rim, and
+nothing under the board standing as high as the shell's edge. How it got there, with before and
+after cuts: [ALLAN_FITMENT.md](ALLAN_FITMENT.md). The original head, with no collar, is still
+here as `amoled18_stand_head.stl` and fits the same boxes.
 
 ## The guides
 
@@ -77,8 +82,8 @@ battery plug's polarity before connecting it, and don't leave it charging unatte
 |---|---|
 | `back_plate_*.stl` | Ready-to-print plates, one per version |
 | `amoled18_hole_plugs.stl` | Six press-fit plugs |
-| `amoled18_stand_head.stl`, `amoled18_stand_box_*.stl` | The desk stand: one head, a box per battery |
-| `amoled18_stand_head_allan_fitment*.stl` | A snugger desk-stand head for the same boxes, without a collar or with a built-in 3 mm collar (print it in any colour to tell units apart). See [ALLAN_FITMENT.md](ALLAN_FITMENT.md) |
+| `amoled18_stand_head_allan_fitment_collar.stl`, `amoled18_stand_box_*.stl` | The desk stand: one head (with its collar), a box per battery |
+| `amoled18_stand_head_allan_fitment.stl`, `amoled18_stand_head.stl` | Other heads for the same boxes: the snug head without a collar, and the original head. See [ALLAN_FITMENT.md](ALLAN_FITMENT.md) |
 | `amoled18_back_plate.scad` | The adjustable model ([MODEL_ADJUSTMENT.md](MODEL_ADJUSTMENT.md)) |
 | `amoled18_back_plate.json` | The versions and the desk stand's parts as OpenSCAD presets |
 | `renders/` | Every image in these guides, and `make_renders.sh` to regenerate them |

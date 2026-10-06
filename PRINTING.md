@@ -96,16 +96,17 @@ The two-part version ([README](README.md#or-the-desk-stand)). Parts are the same
 
 | Part | Notes |
 |---|---|
-| **Head** | `amoled18_stand_head.stl`: one, whatever the battery |
+| **Head** | `amoled18_stand_head_allan_fitment_collar.stl`: one, whatever the battery. Its collar shows between the box and the display, so print it in a colour of its own if you want to tell units apart |
 | **Box** | `amoled18_stand_box_<battery>.stl`, for your battery |
-| **4 × M2 × 4 socket head screws** | Display to head, as for the plate. Any short 1.5 mm hex key reaches: the holes are only 2 mm deep |
+| **4 × M2 × 5 socket head screws** | Display to head. A 1.5 mm hex key reaches down the 4 mm holes. (The original head, `amoled18_stand_head.stl`, takes M2 × 4) |
 | **6 × M2 × 8 countersunk (flat head) screws** | Head to box: two on each side, one in the top, one in the bottom. DIN 965 (Phillips) or DIN 7991 (hex). Their heads sit flush in the box's countersunk holes, and they cut their own thread in the head. Shorter than 8 mm won't bite enough |
 | No plugs | The head's back is hidden inside the box |
 
 ### Print
 
 Both with the settings in step 2. The head goes back face down, like the plate; the box stands
-on its bottom as the file loads, sloped top up. Neither needs supports.
+on its bottom as the file loads, sloped top up. Neither needs supports: the underside of the
+head's collar overhangs the part below it by at most 1.2 mm, which prints cleanly.
 
 ![The head back face down, the box on its bottom](renders/stand-print-bed.png)
 
@@ -132,12 +133,13 @@ the board through the head, so it goes in this order:
    mouth faces the slot, so the plug goes straight in.
 4. **Head onto the display**: seat it on the front shell. It only goes one way that works: the
    slot sits beside the socket, near the screen's bottom edge, right of centre, and the USB-C
-   and buttons are on the top edge. Screw it on with the four M2 × 4 (step 6). Keep the box
+   and buttons are on the top edge. Screw it on with the four M2 × 5 (step 6), only until
+   they're snug: the tower tops sit 0.5 mm below the shell's edge, so the screws close that gap. Keep the box
    beside it while you work; the wire is short.
 5. Lay the foam on the battery, tuck the spare wire into the box, and **lower the head into the
    box's sloped end**, USB-C side to the box's short wall — away from the long flat wall. Its
    six notches drop over the pads inside, and it sinks in until its back rests on the ledge and
-   the front shell sits on the box's rim.
+   its collar sits on the box's rim.
 6. **Lock it**: drive an M2 × 8 countersunk screw through each of the six holes round the box's
    rim into the head, until its head sits flush. Snug, not tight — it's cutting its own thread
    in plastic.

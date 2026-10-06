@@ -2,14 +2,18 @@
 
 ## What to print
 
-There are two versions. Pick one, and keep the box you already have.
+The collar head is now the recommended desk-stand head for everyone (see the
+[README](README.md#or-the-desk-stand)). There are two versions. Pick one, and keep the box you
+already have.
 
 | Version | Print | Notes |
 |---|---|---|
 | **With collar** | [`amoled18_stand_head_allan_fitment_collar.stl`](amoled18_stand_head_allan_fitment_collar.stl) | The head is 3 mm taller. Above the box it widens to the case outline, so a 3 mm band of it shows between the box and the display. The lock blocks sit 3 mm under where the board's standoffs land. Print the head in a different colour for each unit to tell them apart |
 | **Without collar** | [`amoled18_stand_head_allan_fitment.stl`](amoled18_stand_head_allan_fitment.stl) | Same height as the stock head. The tower tops and lock blocks sit 0.5 mm under where the standoffs land, and the display screws clamp on 0.9 mm of plastic instead of 2 mm |
 
-Both heads print back face down without supports. On the collar head, the underside of the
+The display screws are M2 × 5 for the collar head and M2 × 4 for the head without a
+collar; the console's `SCREWS` line gives the length for whichever you export. Both heads
+print back face down without supports. On the collar head, the underside of the
 collar overhangs the head's lower part by up to about 1.2 mm. That's a short enough
 overhang to print cleanly without supports.
 
