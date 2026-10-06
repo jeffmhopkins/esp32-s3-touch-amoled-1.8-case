@@ -144,9 +144,8 @@ below (the model's defaults, which the boxes are built from); see
 
 The head that ships (`amoled18_stand_head.stl`, preset **Desk stand: head (fits every box)**)
 is the head above with these changes; `amoled18_stand_head_no_collar.stl` (preset **Desk
-stand: head, no collar**) has all of them but the collar. Each one came from
-fitting a stand on a second unit; [ALLAN_FITMENT.md](ALLAN_FITMENT.md) has the story and the
-before and after cuts.
+stand: head, no collar**) has all of them but the collar. Each one came from fitting a stand
+on a second unit, where the stock head was loose in the box and the front shell sat above it.
 
 - **A 3 mm collar** (`collar_h`). Above the box's band the head widens to the case outline,
   so the box, collar and front shell are flush. The part in the box (`pocket_h`) is unchanged,

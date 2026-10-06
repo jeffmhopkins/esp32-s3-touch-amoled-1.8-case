@@ -56,11 +56,8 @@ Each is cut open as it sits on the table, you on the right: battery green, tape 
 Sizes are front to back × left to right × height. How to print and assemble it:
 [PRINTING.md](PRINTING.md#desk-stand).
 
-The collar head came out of fitting a stand on a second unit: a snugger fit, a shorter rim, and
-nothing under the board standing as high as the shell's edge. How it got there, with before and
-after cuts: [ALLAN_FITMENT.md](ALLAN_FITMENT.md). If you'd rather not have the collar,
-`amoled18_stand_head_no_collar.stl` has the same fit at the stock head's height, and fits the
-same boxes.
+If you'd rather not have the collar, `amoled18_stand_head_no_collar.stl` is the same head at
+the stock cover's height, and fits the same boxes.
 
 ## The guides
 
@@ -84,7 +81,7 @@ battery plug's polarity before connecting it, and don't leave it charging unatte
 | `back_plate_*.stl` | Ready-to-print plates, one per version |
 | `amoled18_hole_plugs.stl` | Six press-fit plugs |
 | `amoled18_stand_head.stl`, `amoled18_stand_box_*.stl` | The desk stand: one head (with its collar), a box per battery |
-| `amoled18_stand_head_no_collar.stl` | The same head without the collar, for the same boxes. See [ALLAN_FITMENT.md](ALLAN_FITMENT.md) |
+| `amoled18_stand_head_no_collar.stl` | The same head without the collar, for the same boxes |
 | `amoled18_back_plate.scad` | The adjustable model ([MODEL_ADJUSTMENT.md](MODEL_ADJUSTMENT.md)) |
 | `amoled18_back_plate.json` | The versions and the desk stand's parts as OpenSCAD presets |
 | `renders/` | Every image in these guides, and `make_renders.sh` to regenerate them |

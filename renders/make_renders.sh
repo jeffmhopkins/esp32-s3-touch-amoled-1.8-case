@@ -65,34 +65,3 @@ run fig-stand-side.png src/fig_stand_side.scad --projection=o --imgsize=1400,100
 run fig-stand-joint.png src/fig_stand_joint.scad --projection=o --imgsize=1300,900 --camera=0,21.5,3.0,90,0,90,58 -p "$PRESETS" -P "$B1" $HEAD
 run fig-stand-head.png src/fig_stand_head.scad --projection=o --imgsize=1500,1000 --camera=0,2,0,30,0,0,265 -p "$PRESETS" -P "$B1" $HEAD
 run stand-print-bed.png src/fig_stand_print.scad --imgsize=1000,700 --camera=-15,0,10,50,0,15,260 -p "$PRESETS" -P "$B1" $HEAD
-
-echo "Allan fitment (stock head vs the snug head, in the unchanged 103035 box)"
-openscad -o src/allan_box_slice.stl -p "$PRESETS" -P "$B1" src/fig_allan_box_slice.scad 2>&1 | grep -iE "warning|error" || true
-FIX="-D lip_h=1.5 -D tower_drop=2.0 -D pocket_clear=0.05 -D lip_slop=0.05 -D stock_clear=3.4 -D stand_ledge=1.1 -D lock_pad=1.1 -D lock_block_join=true"
-TRAP="-D lip_h=1.5 -D tower_drop=1.5 -D pocket_clear=0.05 -D lip_slop=0.05"
-af="--projection=o --imgsize=1400,1000 --camera=0,20.2,4.0,90,0,90,38"
-ad="--projection=o --imgsize=1000,1000 --camera=0,21.45,3.6,90,0,90,6"
-run allan-fitment-before.png src/fig_allan_fitment.scad $af -p "$PRESETS" -P "$B1" -D 'title="Before: stock head"'
-run allan-fitment-trap.png src/fig_allan_fitment.scad $af -p "$PRESETS" -P "$B1" -D 'title="Rim lowered alone (not used)"' $TRAP
-run allan-fitment-after.png src/fig_allan_fitment.scad $af -p "$PRESETS" -P "$B1" -D 'title="After: Allan fitment head"' $FIX
-run allan-fitment-gaps-before.png src/fig_allan_fitment.scad $ad -p "$PRESETS" -P "$B1" -D detail=true -D 'title="Before"'
-run allan-fitment-gaps-after.png src/fig_allan_fitment.scad $ad -p "$PRESETS" -P "$B1" -D detail=true -D 'title="After"' $FIX
-at="--projection=o --imgsize=1400,1000 --camera=0,-14.6,4.6,90,0,90,38"
-run allan-towers-before.png src/fig_allan_towers.scad $at -p "$PRESETS" -P "$B1" -D 'title="Before: towers at the seam"'
-run allan-towers-after.png src/fig_allan_towers.scad $at -p "$PRESETS" -P "$B1" -D 'title="After: towers 0.5 mm down"' $FIX
-H="Desk stand: head (fits every box)"
-run allan-collar-assembled.png src/fig_stand.scad --imgsize=900,700 --camera=35,0,25,55,0,35,200 -p "$PRESETS" -P "$H" -D 'view="assembled"' -D 'head_color="DarkOrange"'
-run allan-collar-exploded.png src/fig_stand.scad --imgsize=900,700 --camera=35,0,25,55,0,35,260 -p "$PRESETS" -P "$H" -D 'view="exploded"' -D 'head_color="DarkOrange"'
-run allan-collar-cut.png src/fig_allan_towers.scad --projection=o --imgsize=1400,1100 --camera=0,-15.0,6.3,90,0,90,44 -p "$PRESETS" -P "$H" -D 'title="With the collar"'
-python3 - <<'PY'
-from PIL import Image
-def pair(l, r, out, gap, num, den):
-    a, b = Image.open(l), Image.open(r)
-    c = Image.new("RGB", (a.width + b.width + gap, a.height), (255, 255, 255))
-    c.paste(a, (0, 0)); c.paste(b, (a.width + gap, 0))
-    c.resize((c.width * num // den, c.height * num // den), Image.LANCZOS).save(out, optimize=True)
-pair("allan-fitment-before.png", "allan-fitment-after.png", "allan-fitment-compare.png", 0, 2, 3)
-pair("allan-towers-before.png", "allan-towers-after.png", "allan-towers-compare.png", 0, 2, 3)
-pair("allan-fitment-gaps-before.png", "allan-fitment-gaps-after.png", "allan-fitment-gaps.png", 20, 7, 10)
-PY
-echo "  allan-fitment-compare.png, allan-towers-compare.png, allan-fitment-gaps.png"
