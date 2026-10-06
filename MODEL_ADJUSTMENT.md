@@ -43,7 +43,7 @@ stand). Back to the [README](README.md).
 | Grip ribs | `grip_depth`, `grip_style` | 5b. Grip |
 | Export plugs instead of the plate | `part` | 6. Output |
 | Desk stand: screen angle, box size | `desk_stand`, `stand_angle`, `stand_front_min`, `box_floor` | 7. Desk stand |
-| Desk stand: how the head fits the box, lock screws | `pocket_wall`, `pocket_clear`, `stand_ledge`, `lock_spread`, `lock_top_bottom`, `lock_pad` | 7. Desk stand |
+| Desk stand: how the head fits the box, lock screws, collar | `pocket_wall`, `pocket_clear`, `stand_ledge`, `lock_spread`, `lock_top_bottom`, `lock_pad`, `collar_h` | 7. Desk stand |
 | See the battery in the preview | `show_battery` | 6. Output |
 
 The sections below show what each of these is on the part.
@@ -193,6 +193,7 @@ printed (on its floor): `end` makes the longest box, `flat` the shortest.
 | `lock_spread` | Distance between the two lock screws on each side (0 = one per side, in the middle) | Rarely; 14 keeps them on the flat part of the side |
 | `lock_top_bottom` | One more lock screw in the top and one in the bottom, diagonally opposite so they miss the battery slot | Untick for side screws only |
 | `lock_pad` | How far the thicker pad at each lock screw reaches into a notch in the head's edge, at most `stand_ledge` (1.0) | 0 for no pads (then the screws seat in the 1.1 mm band alone) |
+| `collar_h` | A separate ring between the box and the front shell (0 = none). The head grows this much taller and passes up through it; the box doesn't change. Export it with `part = collar` | To lift the board further above the lock blocks, or to print a coloured band that tells units apart |
 
 The head can't shrink past its own rim, so `pocket_wall` + `pocket_clear` together can't go above
 1.35; the console stops with `RIM IS LARGER THAN THE HEAD` if they do. The box's outside is always

@@ -38,7 +38,14 @@
             "lip_slop": "0.05",
             "stock_clear": "3.4",
             "stand_ledge": "1.1",
-            "lock_pad": "1.1"
+            "lock_pad": "1.1",
+            "collar_h": "3"
+        },
+        "Desk stand: collar, Allan fitment": {
+            "desk_stand": "true",
+            "part": "collar",
+            "collar_h": "3",
+            "pocket_clear": "0.05"
         },
         "Desk stand: box for 103035 on edge": {
             "battery_t": "10",
