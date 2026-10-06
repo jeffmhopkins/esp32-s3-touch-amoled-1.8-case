@@ -65,15 +65,23 @@ run stand-print-bed.png src/fig_stand_print.scad --imgsize=1000,700 --camera=-15
 
 echo "Allan fitment (stock head vs the snug head, in the unchanged 103035 box)"
 openscad -o src/allan_box_slice.stl -p "$PRESETS" -P "$B1" src/fig_allan_box_slice.scad 2>&1 | grep -iE "warning|error" || true
+FIX="-D lip_h=1.5 -D tower_drop=1.5 -D pocket_clear=0.05 -D lip_slop=0.05 -D stock_clear=3.4"
+TRAP="-D lip_h=1.5 -D tower_drop=1.5 -D pocket_clear=0.05 -D lip_slop=0.05"
 af="--projection=o --imgsize=1400,1000 --camera=0,20.2,4.0,90,0,90,38"
+ad="--projection=o --imgsize=1000,1000 --camera=0,21.45,3.6,90,0,90,6"
 run allan-fitment-before.png src/fig_allan_fitment.scad $af -p "$PRESETS" -P "$B1" -D 'title="Before: stock head"'
-run allan-fitment-after.png src/fig_allan_fitment.scad $af -p "$PRESETS" -P "$B1" -D 'title="After: Allan fitment head"' \
-  -D lip_h=1.5 -D tower_drop=1.5 -D pocket_clear=0.05 -D lip_slop=0.05 -D stock_clear=3.4
+run allan-fitment-trap.png src/fig_allan_fitment.scad $af -p "$PRESETS" -P "$B1" -D 'title="Rim lowered alone (not used)"' $TRAP
+run allan-fitment-after.png src/fig_allan_fitment.scad $af -p "$PRESETS" -P "$B1" -D 'title="After: Allan fitment head"' $FIX
+run allan-fitment-gaps-before.png src/fig_allan_fitment.scad $ad -p "$PRESETS" -P "$B1" -D detail=true -D 'title="Before"'
+run allan-fitment-gaps-after.png src/fig_allan_fitment.scad $ad -p "$PRESETS" -P "$B1" -D detail=true -D 'title="After"' $FIX
 python3 - <<'PY'
 from PIL import Image
-a, b = Image.open("allan-fitment-before.png"), Image.open("allan-fitment-after.png")
-c = Image.new("RGB", (a.width + b.width, a.height), (248, 248, 248))
-c.paste(a, (0, 0)); c.paste(b, (a.width, 0))
-c.resize((c.width * 2 // 3, c.height * 2 // 3), Image.LANCZOS).save("allan-fitment-compare.png", optimize=True)
+def pair(l, r, out, gap, num, den):
+    a, b = Image.open(l), Image.open(r)
+    c = Image.new("RGB", (a.width + b.width + gap, a.height), (255, 255, 255))
+    c.paste(a, (0, 0)); c.paste(b, (a.width + gap, 0))
+    c.resize((c.width * num // den, c.height * num // den), Image.LANCZOS).save(out, optimize=True)
+pair("allan-fitment-before.png", "allan-fitment-after.png", "allan-fitment-compare.png", 0, 2, 3)
+pair("allan-fitment-gaps-before.png", "allan-fitment-gaps-after.png", "allan-fitment-gaps.png", 20, 7, 10)
 PY
-echo "  allan-fitment-compare.png"
+echo "  allan-fitment-compare.png, allan-fitment-gaps.png"
