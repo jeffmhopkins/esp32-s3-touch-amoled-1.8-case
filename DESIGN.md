@@ -28,7 +28,10 @@ are in the front shell, so the plate has no other openings.
 - **The board's `BAT` connector** stands 3.5 mm off the back of the board, on one long side about
   halfway along. The flat 802525 sits under it, so that version leaves 2 mm extra above the cell.
 - **The rim** is the top of the wall itself (0.8 mm), so it stands squarely on the wall with
-  nothing overhanging. Its opening is the cavity.
+  nothing overhanging. Its opening is the cavity. It has a 4 mm slot 8.5 mm either side of the
+  middle of each short side (`mic_slots`), behind the U-shaped speaker/mic notch in the front
+  shell's edge, so the rim doesn't close that notch off. There are four so it clears whichever
+  way round the part goes on; the shell hides the ones it doesn't need.
 
 ![Bottom of the wall: floor, chamfer, bed edge](renders/fig-floor-detail.png)
 
@@ -148,8 +151,12 @@ stand: head, no collar**) has all of them but the collar. Each one came from fit
 on a second unit, where the stock head was loose in the box and the front shell sat above it.
 
 - **A 3 mm collar** (`collar_h`). Above the box's band the head widens to the case outline,
-  so the box, collar and front shell are flush. The part in the box (`pocket_h`) is unchanged,
-  so the boxes are too.
+  so the box, collar and front shell are flush. The part in the box (`pocket_h`) is unchanged.
+  The collar's underside slopes up at 45° from the head's side (`collar_chamfer`), so it prints
+  without a sagging overhang, and the box's band rises in a matching 45° ramp that the
+  collar nests on, 0.1 mm clear. The boxes therefore carry `collar_h` too: a box made with it
+  has the ramp. The collar head also fits a box without the ramp, leaving a small V-groove
+  between them; the no-collar head needs a box without the ramp.
 - **Tower tops 0.5 mm below the seam** (`tower_drop` = `lip_h` + 0.5), so standoffs that reach
   past the shell's edge can't hold it up. The screw seat stays 2 mm thanks to the collar, and
   the screws become M2 × 5.

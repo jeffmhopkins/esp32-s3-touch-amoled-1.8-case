@@ -94,6 +94,13 @@ lip_inset = 1.4;     // [0:0.1:6]
 lip_h = 2.0;         // [0:0.1:8]
 // Width of the rim wall (how thick the band is)
 lip_wall = 0.8;      // [0.4:0.1:4]
+// Slots in the rim behind the front shell's speaker/mic notch (a U in the shell's edge on
+// one short side, about 8.5 mm off centre), so the rim doesn't close it off. Cut on both
+// short sides at both offsets, so they clear it whichever way round the part goes on; the
+// shell hides them.
+mic_slots = true;
+mic_slot_x = 8.5;    // [0:0.5:16]
+mic_slot_w = 4.0;    // [1:0.5:8]
 // Clearance taken off the outside so it is not a press fit
 lip_slop = 0.15;     // [0:0.05:0.6]
 // Inside depth of the STOCK cover (rim top down to the floor)
@@ -220,6 +227,10 @@ lock_pad = 1.0;         // [0:0.1:2]
 // band flush with the box and the front shell. The box doesn't change. Print the head
 // in any colour to tell units apart.
 collar_h = 0;           // [0:0.5:8]
+// Slope the collar's underside at 45 degrees so it prints without sagging, and give the
+// box's band a matching 45 degree ramp it nests on. Set the same collar_h on the head and
+// the box: a box made with a collar has the ramp, and only fits a head with one.
+collar_chamfer = true;
 // Fill between each lock block and its nearest screw tower, up to the block's top, so
 // there's no narrow V between the block and the tower's flare
 lock_block_join = false;
@@ -310,6 +321,13 @@ total_h     = body_h + lip_h;
 // The part of a desk head that sits in the box (the collar is above it). The box is
 // built to this, so a collar doesn't change it.
 pocket_h    = desk ? body_h - collar_h : body_h;
+// The collar's chamfer: as tall as it is wide, so 45 degrees along the straight edges
+// (steeper round the corners, where the case's rounder corners leave less to cover).
+collar_c    = desk && collar_h > 0 && collar_chamfer ? min(collar_h, pocket_wall + pocket_clear) : 0;
+// The box's ramp is defined from its opening (which doesn't depend on pocket_clear), this
+// far below the 45 degree line from the opening's edge; the head's chamfer starts at its own
+// edge, pocket_clear inside the opening, so the two are pocket_clear + collar_gap apart.
+collar_gap  = 0.05;
 extra_depth = total_h - plate_t - stock_clear;
 
 // Full chamfer where the cell leaves room. Near the cell it may rise only to the
@@ -501,8 +519,10 @@ module solid_body() {
 
     // The collar: above the box's band the head widens to the case outline, so it sits
     // on the band and the front shell sits on it, flush with both.
-    if (desk && collar_h > 0)
-        translate([0, 0, pocket_h]) rbox(plate_x, plate_y, collar_h, plate_r);
+    if (desk && collar_h > 0) {
+        translate([0, 0, pocket_h + collar_c]) rbox(plate_x, plate_y, collar_h - collar_c, plate_r);
+        if (collar_c > 0) collar_chamfer_solid();
+    }
 
     if (lip_h > 0.05)
         translate([0, 0, body_h - eps])
@@ -510,6 +530,10 @@ module solid_body() {
                 difference() {
                     rrect(rim_out_x, rim_out_y, rim_out_r);
                     rrect(rim_in_x, rim_in_y, rim_in_r);
+                    if (mic_slots)
+                        for (sx = [-1, 1], sy = [-1, 1])
+                            translate([sx * mic_slot_x - mic_slot_w / 2, sy > 0 ? rim_in_y / 2 - 1 : -rim_out_y / 2 - 1])
+                                square([mic_slot_w, (rim_out_y - rim_in_y) / 2 + 2]);
                 }
 
     // Tower tops that rise into the rim, trimmed to its outline so they
@@ -815,6 +839,28 @@ module pocket_ring_2d() {
 module pocket_ring() {
     difference() {
         translate([0, 0, -eps]) linear_extrude(height = pocket_h + eps) pocket_ring_2d();
+    }
+    // The ramp the collar's chamfer nests on, collar_gap below it.
+    if (collar_c > 0)
+        difference() {
+            translate([0, 0, pocket_h - eps]) linear_extrude(height = pocket_wall + eps) pocket_ring_2d();
+            translate([0, 0, -collar_gap]) {
+                hull() {
+                    translate([0, 0, pocket_h])
+                        linear_extrude(height = eps) rrect(head_x + 2 * pocket_clear, head_y + 2 * pocket_clear, head_r + pocket_clear);
+                    translate([0, 0, pocket_h + pocket_wall]) linear_extrude(height = eps) rrect(plate_x, plate_y, plate_r);
+                }
+                translate([0, 0, pocket_h + pocket_wall - eps]) rbox(plate_x + 2, plate_y + 2, 10, plate_r + 1);
+            }
+        }
+}
+
+// The collar's sloped underside: from the head's outline at pocket_h out to the case outline
+// collar_c higher.
+module collar_chamfer_solid() {
+    hull() {
+        translate([0, 0, pocket_h]) linear_extrude(height = eps) rrect(head_x, head_y, head_r);
+        translate([0, 0, pocket_h + collar_c]) linear_extrude(height = eps) rrect(plate_x, plate_y, plate_r);
     }
 }
 

@@ -83,7 +83,8 @@ Back to the [README](README.md).
 | **…and the head's rim touches the inside of the shell first** | Rim taller than the shell's inside step | Lower `lip_h` and `stock_clear` by the same amount, and `tower_drop` with them |
 | **Front shell won't press onto the head's rim** | Rim a little big for this shell | Raise `lip_slop` to 0.1 in the head preset |
 | **Display screws don't bite, or bottom out** | Wrong length for the head | M2 × 5 for the collar head, M2 × 4 for the head without a collar; the console's `SCREWS` line gives it |
-| **Underside of the collar droops** | The overhang (up to 1.2 mm) printed hot | More part cooling, or slow the first layers above it; it's hidden against the box's rim |
+| **Underside of the collar droops** | A head from before the collar's underside was sloped | Reprint the head and box from the current files: the collar's underside is now 45° |
+| **Speaker or mic sounds muffled** | The rim covers the U-shaped notch in the front shell's edge | Use current files (the rim has slots there); if your shell's notch is elsewhere, move `mic_slot_x` to its centre |
 | **Front shell overhangs the box, or the box sticks out** | The case outline differs from the drawing | Measure the stock cover and correct `plate_x`, `plate_y`, `plate_r` |
 | **Head sits proud, rocking on the battery** | Foam too thick, or the cell is bigger than entered | Thinner foam; measure the cell and enter it, which makes the box longer |
 | **Plug won't go through the slot** | A bigger plug than the usual MX1.25 | Open the slot with a file; the plug only has to pass once |

@@ -101,6 +101,7 @@ estimate from photos, so it's the thing most worth checking against the stock co
 | `lip_h` | How tall the rim stands | Measure the stock rim |
 | `lip_slop` | Taken off the outside so it isn't a press fit | Bigger = looser |
 | `lip_wall` | Thickness of the rim | Thinner gives the battery a little more room (0.6 opens a 40 mm cell's space to 41.1) |
+| `mic_slots`, `mic_slot_x`, `mic_slot_w` | Slots in the rim behind the front shell's speaker/mic notch: 4 mm wide, 8.5 mm off centre on both short sides | If the notch on your shell sits elsewhere, move `mic_slot_x` to its centre |
 
 ## Screw towers
 
@@ -180,6 +181,8 @@ for a snugger head that fits those same boxes ([DESIGN.md](DESIGN.md#the-collar-
 
 Change head fields in a head preset, and box fields in a box preset. Don't copy the head's
 `lock_pad` or `stand_ledge` into a box preset: there they change the box's pads and ledge.
+The box presets do set `collar_h` (3): it gives the box's band the 45° ramp the collar's
+underside nests on. Set it to 0 in a box preset to make a box for the no-collar head.
 
 ### The box
 
@@ -212,6 +215,7 @@ printed (on its floor): `end` makes the longest box, `flat` the shortest.
 | `lock_top_bottom` | One more lock screw in the top and one in the bottom, diagonally opposite so they miss the battery slot | Untick for side screws only |
 | `lock_pad` | How far the thicker pad at each lock screw reaches into a notch in the head's edge, at most `stand_ledge` (1.0; the head presets use 1.1 so the notch matches the wider head) | 0 for no pads (then the screws seat in the 1.1 mm band alone) |
 | `collar_h` | A collar on the head between the box and the front shell (0 = none). The head grows this much taller and, above the box, widens to the case outline; the box doesn't change | To lift the board further above the lock blocks, or to print a coloured band that tells units apart |
+| `collar_chamfer` | Slopes the collar's underside at 45° so it prints without sagging, and gives the box's band a matching ramp (on by default) | Off only for a flat-bottomed collar, which then overhangs about 1.2 mm |
 | `lock_block_join` | Fill between each lock block and its nearest screw tower, up to the block's top (off by default) | On, to get rid of the narrow V between a block and the tower's flare |
 
 The head can't shrink past its own rim, so `pocket_wall` + `pocket_clear` together can't go above

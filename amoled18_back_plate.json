@@ -58,7 +58,8 @@
             "lead_space": "0",
             "lead_end": "2",
             "desk_stand": "true",
-            "part": "box"
+            "part": "box",
+            "collar_h": "3"
         },
         "Desk stand: box for 104050 on end (tight, measure first)": {
             "battery_t": "10",
@@ -69,7 +70,8 @@
             "lead_end": "0",
             "desk_stand": "true",
             "part": "box",
-            "stand_ledge": "0.8"
+            "stand_ledge": "0.8",
+            "collar_h": "3"
         },
         "Desk stand: box for 802525 flat": {
             "battery_t": "8.6",
@@ -79,7 +81,8 @@
             "lead_space": "2",
             "lead_end": "2",
             "desk_stand": "true",
-            "part": "box"
+            "part": "box",
+            "collar_h": "3"
         }
     }
 }
