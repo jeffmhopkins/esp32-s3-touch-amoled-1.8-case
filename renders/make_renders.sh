@@ -77,7 +77,7 @@ run allan-fitment-gaps-after.png src/fig_allan_fitment.scad $ad -p "$PRESETS" -P
 at="--projection=o --imgsize=1400,1000 --camera=0,-14.6,4.6,90,0,90,38"
 run allan-towers-before.png src/fig_allan_towers.scad $at -p "$PRESETS" -P "$B1" -D 'title="Before: towers at the seam"'
 run allan-towers-after.png src/fig_allan_towers.scad $at -p "$PRESETS" -P "$B1" -D 'title="After: towers 0.5 mm down"' $FIX
-H="Desk stand: head, Allan fitment (snug)"
+H="Desk stand: head, Allan fitment with collar"
 run allan-collar-assembled.png src/fig_stand.scad --imgsize=900,700 --camera=35,0,25,55,0,35,200 -p "$PRESETS" -P "$H" -D 'view="assembled"'
 run allan-collar-exploded.png src/fig_stand.scad --imgsize=900,700 --camera=35,0,25,55,0,35,260 -p "$PRESETS" -P "$H" -D 'view="exploded"'
 run allan-collar-cut.png src/fig_allan_towers.scad --projection=o --imgsize=1400,1100 --camera=0,-15.0,6.3,90,0,90,44 -p "$PRESETS" -P "$H" -D 'title="With the collar"'

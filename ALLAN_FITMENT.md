@@ -2,16 +2,19 @@
 
 ## What to print
 
-Two new parts, and the box you already have:
+There are two versions. Pick one, and keep the box you already have.
 
-| Part | File | Notes |
+| Version | Print | Notes |
 |---|---|---|
-| Head | [`amoled18_stand_head_allan_fitment.stl`](amoled18_stand_head_allan_fitment.stl) | One for every box. Back face down, no supports |
-| Collar | [`amoled18_stand_collar_allan_fitment.stl`](amoled18_stand_collar_allan_fitment.stl) | A 3 mm ring between the box and the display. Print it in a different colour for each unit to tell them apart. Flat, no supports |
+| **With collar** | [`amoled18_stand_head_allan_fitment_collar.stl`](amoled18_stand_head_allan_fitment_collar.stl) + [`amoled18_stand_collar_allan_fitment.stl`](amoled18_stand_collar_allan_fitment.stl) | The head is 3 mm taller and passes through a 3 mm ring. The lock blocks sit 3 mm under where the board's standoffs land. Print the collar in a different colour for each unit to tell them apart |
+| **Without collar** | [`amoled18_stand_head_allan_fitment.stl`](amoled18_stand_head_allan_fitment.stl) | Same height as the stock head. The tower tops and lock blocks sit 0.5 mm under where the standoffs land, and the display screws clamp on 0.9 mm of plastic instead of 2 mm |
+
+Both heads print back face down and the collar prints flat, all without supports. A collar
+only fits the collar head, and the collar head needs a collar.
 
 ![The stand with the collar (orange), assembled and pulled apart](renders/allan-collar-exploded.png)
 
-The box STLs are unchanged, and the one head and collar fit all three:
+The box STLs are unchanged, and both heads fit all three:
 
 | Battery | Box (unchanged, reprint not needed) |
 |---|---|
@@ -19,9 +22,9 @@ The box STLs are unchanged, and the one head and collar fit all three:
 | 802525 400 mAh flat | [`amoled18_stand_box_802525_flat.stl`](amoled18_stand_box_802525_flat.stl) |
 | 104050 2400 mAh on end | [`amoled18_stand_box_104050_end.stl`](amoled18_stand_box_104050_end.stl) |
 
-The new head and collar were checked against each of these three box STLs in their seated
-positions. Nothing overlaps anywhere: the head's back rests on the box's ledge, as the stock
-head's does, and the collar sits on the box's top band. The screws are unchanged too.
+Both heads and the collar were checked against each of these three box STLs in their seated
+positions. Nothing overlaps anywhere: each head's back rests on the box's ledge, as the
+stock head's does, and the collar sits on the box's top band. The screws are unchanged too.
 
 ## 1. The problem
 
@@ -102,7 +105,7 @@ New preset **Desk stand: head, Allan fitment (snug)** in
 | `pocket_clear` | 0.15 | 0.05 | Head-to-box gap each side. Makes the head bigger; the box opening stays the same |
 | `lip_slop` | 0.15 | 0.05 | Rim-to-shell gap each side |
 | `lock_pad`, `stand_ledge` | 1.0 | 1.1 | Makes the head's lock-screw notches 0.1 mm deeper (see below) |
-| `collar_h` | 0 | 3 | Adds the collar and makes the head 3 mm taller (see section 5) |
+| `collar_h` | 0 | 0, or 3 with collar | Adds the collar and makes the head 3 mm taller (see section 5) |
 
 `pocket_wall` stays at 1.1. Neither gap is 0.
 
@@ -116,8 +119,8 @@ Neither one changes the stock head or any other preset:
   2 mm tall. With the towers lowered, it would have left a ring standing at the seam
   around each tower.
 
-Without the collar, lowering the towers would thin the plastic each display screw's head
-clamps on to 0.9 mm. With the collar, the towers are taller, so it's back to the full
+Without the collar, lowering the towers thins the plastic each display screw's head
+clamps on to 0.9 mm. With the collar the towers are taller, so it's back to the full
 2 mm. The console reports both numbers: `Towers: tops 0.5 mm below the seam ... screw seat
 2 mm` and `Lock blocks: tops 3 mm below the seam`. Tighten the four display screws only
 until they're snug. If a unit's
@@ -165,20 +168,20 @@ the collar instead of the band. Everything below works the same, 3 mm higher.
 - **No more play.** The close-up above (right side) shows both gaps down to 0.05 mm. The
   head is 0.1 mm wider each side (35.3 × 42.9 mm instead of 35.1 × 42.7 mm), and so is the rim.
 
-| | Stock head | Allan fitment head |
-|---|---|---|
-| Footprint | 35.1 × 42.7 mm | 35.3 × 42.9 mm |
-| Body | 3.5 mm | 3.5 mm |
-| Collar | none | 3 mm ring |
-| Head's overall height | 5.5 mm | 8.0 mm (3.5 in the box, 3 through the collar, 1.5 rim) |
-| Tower tops | at the seam | 0.5 mm below it |
-| Lock blocks | at the seam | 3 mm below it |
-| Screw seat in each tower | 1.4 mm | 2.0 mm |
-| Rim | 2.0 mm | 1.5 mm |
-| Gap to the box, each side | 0.15 mm | 0.05 mm |
-| Gap to the shell, each side | 0.15 mm | 0.05 mm |
+| | Stock head | Allan, without collar | Allan, with collar |
+|---|---|---|---|
+| Footprint | 35.1 × 42.7 mm | 35.3 × 42.9 mm | 35.3 × 42.9 mm |
+| Part in the box | 3.5 mm | 3.5 mm | 3.5 mm |
+| Collar | none | none | 3 mm ring |
+| Head's overall height | 5.5 mm | 5.0 mm | 8.0 mm |
+| Tower tops | at the seam | 0.5 mm below it | 0.5 mm below it |
+| Lock blocks | at the seam | 0.5 mm below it | 3 mm below it |
+| Screw seat in each tower | 1.4 mm | 0.9 mm | 2.0 mm |
+| Rim | 2.0 mm | 1.5 mm | 1.5 mm |
+| Gap to the box, each side | 0.15 mm | 0.05 mm | 0.05 mm |
+| Gap to the shell, each side | 0.15 mm | 0.05 mm | 0.05 mm |
 
-F5 in OpenSCAD prints `All checks passed.` for this preset. The new head hasn't been
+F5 in OpenSCAD prints `All checks passed.` for all three Allan presets. The new head hasn't been
 printed yet.
 
 ## 5. The collar
@@ -201,14 +204,16 @@ the box:
 ![Assembled](renders/allan-collar-assembled.png)
 
 The collar's height is `collar_h` in the model (0 = no collar). Change it in **both**
-presets, the head's and the collar's, and reprint both: the head grows by the same amount.
+presets, **Desk stand: head, Allan fitment with collar** and **Desk stand: collar, Allan
+fitment**, and reprint both: the head grows by the same amount.
 The box is the same at any collar height.
 
 ## Files
 
 | File | What it is |
 |---|---|
-| [`amoled18_stand_head_allan_fitment.stl`](amoled18_stand_head_allan_fitment.stl) | The new head, ready to print. It fits every stand box |
+| [`amoled18_stand_head_allan_fitment.stl`](amoled18_stand_head_allan_fitment.stl) | The head without a collar (preset **Desk stand: head, Allan fitment (snug)**). It fits every stand box |
+| [`amoled18_stand_head_allan_fitment_collar.stl`](amoled18_stand_head_allan_fitment_collar.stl) | The head for use with the collar (preset **Desk stand: head, Allan fitment with collar**). It fits every stand box |
 | [`amoled18_stand_collar_allan_fitment.stl`](amoled18_stand_collar_allan_fitment.stl) | The collar, ready to print (preset **Desk stand: collar, Allan fitment**) |
 | [`amoled18_back_plate.json`](amoled18_back_plate.json) | Preset **Desk stand: head, Allan fitment (snug)** |
 | [`amoled18_back_plate.scad`](amoled18_back_plate.scad) | The model. New: `collar_h` and `part = collar`; the lock blocks and tower flares stop at the tower tops. Every other preset comes out the same |
@@ -222,13 +227,16 @@ The box is the same at any collar height.
 
 ## Re-exporting the head
 
-In OpenSCAD's Customizer pick **Desk stand: head, Allan fitment (snug)**, set
-`smoothness` to 96, then F6 and export. `part` is already `plate` (the head only).
+In OpenSCAD's Customizer pick the preset, set `smoothness` to 96, then F6 and export.
 Or from the command line:
 
 ```
 openscad -o amoled18_stand_head_allan_fitment.stl -p amoled18_back_plate.json \
   -P "Desk stand: head, Allan fitment (snug)" -D smoothness=96 amoled18_back_plate.scad
+openscad -o amoled18_stand_head_allan_fitment_collar.stl -p amoled18_back_plate.json \
+  -P "Desk stand: head, Allan fitment with collar" -D smoothness=96 amoled18_back_plate.scad
+openscad -o amoled18_stand_collar_allan_fitment.stl -p amoled18_back_plate.json \
+  -P "Desk stand: collar, Allan fitment" -D smoothness=96 amoled18_back_plate.scad
 ```
 
 Don't scale the old STL instead. Scaling stretches the screw holes and towers too.
