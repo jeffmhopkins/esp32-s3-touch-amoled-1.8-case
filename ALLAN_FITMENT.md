@@ -18,6 +18,8 @@ The fix is a new head only. **The box is unchanged.** Reprint the head and keep 
 | [`amoled18_back_plate.json`](amoled18_back_plate.json) | Preset **Desk stand: head, Allan fitment (snug)** |
 | [`amoled18_back_plate.scad`](amoled18_back_plate.scad) | The model the preset runs in (unchanged) |
 | [`amoled18_stand_head.stl`](amoled18_stand_head.stl) | The original head, for comparison |
+| [`renders/allan-fitment-compare.png`](renders/allan-fitment-compare.png) | Before and after, cut through the side wall |
+| [`renders/src/fig_allan_fitment.scad`](renders/src/fig_allan_fitment.scad), [`fig_allan_box_slice.scad`](renders/src/fig_allan_box_slice.scad) | The sources for those images |
 
 ## What changed
 
@@ -41,6 +43,32 @@ The preset starts from **Desk stand: head (fits every box)** and changes:
 | Overall height | 5.5 mm | 5.0 mm |
 
 F5 in OpenSCAD prints `All checks passed.` for this preset.
+
+## Why it fits better
+
+These images cut through one side wall of the stand, square to the head. The box is
+the same stock 103035 box in both. Only the head changes.
+
+![Before and after, cut through the side wall](renders/allan-fitment-compare.png)
+
+- **The shell lands on the band.** The front shell has an inside step that the rim
+  pushes against. If the rim is taller than that step is deep, the rim hits it first,
+  and the shell's edge stops above the box's 1.1 mm band. That's the white strip in the
+  photos. Lowering the rim from 2.0 to 1.5 mm lets the edge come down onto the band.
+  Nobody has measured the step depth. The drawing assumes 1.5 mm
+  (`shell_depth` in [`renders/src/fig_allan_fitment.scad`](renders/src/fig_allan_fitment.scad)),
+  which matches the roughly 0.5 mm the shell sits too high in the photos.
+- **The body didn't grow.** It stays 3.5 mm, the depth of the box's pocket, so the head
+  still sits level with the band. Only the rim got shorter. That's why `stock_clear` drops
+  along with `lip_h`.
+- **Less play side to side.** The head is 0.1 mm wider each side (0.05 mm gap to the box
+  instead of 0.15), and the rim is 0.1 mm wider each side (0.05 mm gap inside the shell
+  instead of 0.15). The gap to the box is narrower in the after image. The rim-to-shell
+  gap is too small to see at this scale.
+
+Full-size images: [before](renders/allan-fitment-before.png),
+[after](renders/allan-fitment-after.png). Regenerate them with
+[`renders/make_renders.sh`](renders/make_renders.sh).
 
 ## Re-exporting
 

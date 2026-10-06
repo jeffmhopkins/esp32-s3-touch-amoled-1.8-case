@@ -62,3 +62,18 @@ run fig-stand-side.png src/fig_stand_side.scad --projection=o --imgsize=1400,100
 run fig-stand-joint.png src/fig_stand_joint.scad --projection=o --imgsize=1300,900 --camera=0,21.5,1.6,90,0,90,52 -p "$PRESETS" -P "$B1"
 run fig-stand-head.png src/fig_stand_head.scad --projection=o --imgsize=1500,1000 --camera=0,2,0,30,0,0,265 -p "$PRESETS" -P "$B1"
 run stand-print-bed.png src/fig_stand_print.scad --imgsize=1000,700 --camera=-15,0,10,50,0,15,260 -p "$PRESETS" -P "$B1"
+
+echo "Allan fitment (stock head vs the snug head, in the unchanged 103035 box)"
+openscad -o src/allan_box_slice.stl -p "$PRESETS" -P "$B1" src/fig_allan_box_slice.scad 2>&1 | grep -iE "warning|error" || true
+af="--projection=o --imgsize=1400,1000 --camera=0,20.2,4.0,90,0,90,38"
+run allan-fitment-before.png src/fig_allan_fitment.scad $af -p "$PRESETS" -P "$B1" -D 'title="Before: stock head"'
+run allan-fitment-after.png src/fig_allan_fitment.scad $af -p "$PRESETS" -P "$B1" -D 'title="After: Allan fitment head"' \
+  -D lip_h=1.5 -D tower_drop=1.5 -D pocket_clear=0.05 -D lip_slop=0.05 -D stock_clear=3.4
+python3 - <<'PY'
+from PIL import Image
+a, b = Image.open("allan-fitment-before.png"), Image.open("allan-fitment-after.png")
+c = Image.new("RGB", (a.width + b.width, a.height), (248, 248, 248))
+c.paste(a, (0, 0)); c.paste(b, (a.width, 0))
+c.resize((c.width * 2 // 3, c.height * 2 // 3), Image.LANCZOS).save("allan-fitment-compare.png", optimize=True)
+PY
+echo "  allan-fitment-compare.png"
