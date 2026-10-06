@@ -210,6 +210,7 @@ printed (on its floor): `end` makes the longest box, `flat` the shortest.
 |---|---|---|
 | `pocket_wall` | The box's wall round the head at its rim, which the front shell sits on (0.8–1.3). The head is this much (plus `pocket_clear`) smaller than the case each side | Rarely. The default 1.1 is already the most the head's rim allows; go thinner only to give the head more room |
 | `pocket_clear` | Gap between the head and the box, each side (0.05–0.25). The head presets use 0.05, the tightest | Head won't go in: raise by 0.05 in the head preset |
+| `pocket_corner_min` | Thinnest the box's band may get at its corners (0.9). It sets how round the head's corners are; the console reports it and the wall left outside each screw bore | Raise if the band's corners print broken; that thins the wall outside the screw bores |
 | `stand_ledge` | Width of the step inside the box the head's back rests on | Wider is firmer but leaves less room for the battery (the 104050 box uses 0.8) |
 | `lock_spread` | Distance between the two lock screws on each side (0 = one per side, in the middle) | Rarely; 14 keeps them on the flat part of the side |
 | `lock_top_bottom` | One more lock screw in the top and one in the bottom, diagonally opposite so they miss the battery slot | Untick for side screws only |

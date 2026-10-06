@@ -209,6 +209,8 @@ stand_angle = 30;       // [10:1:45]
 pocket_wall = 1.1;      // [0.8:0.1:1.3]
 // Gap between the head and the box, each side. Raise if the head won't go in
 pocket_clear = 0.15;    // [0.05:0.05:0.25]
+// Thinnest the box's band may get at its corners
+pocket_corner_min = 0.9;    // [0.5:0.1:1.5]
 // Width of the step inside the box the head's back rests on
 stand_ledge = 1.0;      // [0.6:0.1:4]
 // Shortest the box's top face may be (the face under the USB-C edge)
@@ -300,9 +302,18 @@ rim_in_r = max(0.3, rim_out_r - lip_wall);
 // case by the box's wall.
 head_x = desk_stand || part == "box" || part == "stand" ? plate_x - 2 * (pocket_wall + pocket_clear) : plate_x;
 head_y = desk_stand || part == "box" || part == "stand" ? plate_y - 2 * (pocket_wall + pocket_clear) : plate_y;
-// Its corners are tighter than the case's so the wall outside each screw bore stays thick.
+// Its corners are tighter than the case's, which leaves the box's band thinner at the
+// corners than along the sides. They're rounded just enough that the band keeps
+// pocket_corner_min there (measured along the corner's diagonal), which also leaves the
+// most wall outside each screw bore. The box's opening is this plus pocket_clear, so it
+// doesn't depend on pocket_clear.
+pocket_open_r = min(plate_r - pocket_wall,
+                    plate_r - (pocket_wall * sqrt(2) - pocket_corner_min) / (sqrt(2) - 1));
 head_r = desk_stand || part == "box" || part == "stand"
-       ? max(1, min(plate_r - pocket_wall - pocket_clear, head_x / 2 - screw_dx)) : plate_r;
+       ? max(1, pocket_open_r - pocket_clear) : plate_r;
+// Wall between each screw bore and the head's rounded corner.
+corner_bore_wall = head_r - norm([screw_dx - (head_x / 2 - head_r), screw_dy - (head_y / 2 - head_r)])
+                 - head_d / 2;
 
 // Straight walls whose inside is the rim's inside, so the rim stands on the
 // wall with nothing overhanging.
@@ -420,6 +431,8 @@ if (desk) {
     echo(str("Screen:             leans back ", stand_angle, " degrees from upright, USB-C and buttons on its top edge"));
     echo(str("Head:               ", head_x, " x ", head_y, " x ", total_h,
              " mm, the same for every box; it sinks into the box's top, its rim standing above"));
+    echo(str("Corners:            box's band ", pocket_corner_min, " mm at its thinnest; ", round(corner_bore_wall * 100) / 100,
+             " mm of wall outside each screw bore in the head"));
     echo(str("Towers:             tops ", body_h - tower_top, " mm below the seam (where the front shell lands); screw seat ", seat, " mm"));
     echo(str("Lock blocks:        tops ", body_h - lock_block_top, " mm below the seam"));
     if (collar_h > 0)

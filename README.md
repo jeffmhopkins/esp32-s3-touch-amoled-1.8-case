@@ -48,8 +48,8 @@ The head is the same for every box, so changing battery only means printing anot
 |---|---|---|---|
 | | ![](renders/stand-section-103035.png) | ![](renders/stand-section-802525.png) | ![](renders/stand-section-104050.png) |
 | Print | `amoled18_stand_head.stl` + `amoled18_stand_box_103035_edge.stl` | head + `amoled18_stand_box_802525_flat.stl` | head + `amoled18_stand_box_104050_end.stl` |
-| Box | 46 × 45 × 34 mm | 34 × 45 × 34 mm | 70 × 45 × 34 mm |
-| With the display on | 58 × 45 × 42 mm | 47 × 45 × 42 mm | 82 × 45 × 42 mm |
+| Box | 46 × 45 × 34 mm | 34 × 45 × 34 mm | 71 × 45 × 34 mm |
+| With the display on | 59 × 45 × 42 mm | 47 × 45 × 42 mm | 83 × 45 × 42 mm |
 | Notes | Roomy | Shortest | Tight fit — measure the cell first |
 
 Each is cut open as it sits on the table, you on the right: battery green, tape red, foam yellow.
