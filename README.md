@@ -40,7 +40,8 @@ A two-part version for a desk. A **head** screws to the display in place of the 
 then sinks into the angled end of a plain **battery box**, held by six flush countersunk
 screws round its rim. Above the box the head widens into a 3 mm **collar**, flush with the box
 and the front shell, so it shows as a band between them: print the head in a different colour
-for each unit to tell them apart. The box lies on its long flat side, and the screen faces you,
+for each unit to tell them apart. The collar's underside is sloped, so it prints without
+supports. The box lies on its long flat side, and the screen faces you,
 landscape, leaning back 30° from upright, with the USB-C and buttons along its top edge.
 The head is the same for every box, so changing battery only means printing another box.
 

@@ -101,7 +101,8 @@ below (the model's defaults, which the boxes are built from); see
   offset in by the band's width, so the band is the same 1.1 mm all the way round, corners
   included. (Tighter head corners pinched the band to 0.3 mm at each corner, too thin to
   print.) That leaves 0.83 mm of wall outside each screw bore in the head, with the head
-  presets' slightly tighter bore (`head_clear` 0.4). It adds a solid block for each lock screw inside its short ends (left and right in
+  presets' slightly tighter bore (`head_clear` 0.4). It adds a solid block for each lock screw
+  inside its short ends (left and right in
   use), and a slot through the floor just in front of the board's `BAT` socket, whose mouth faces
   the slot (from Waveshare's 3D model). The socket is on the side away from the USB-C, which fixes
   which way round the head goes. Its back edge has no chamfer, so all of it bears on the ledge,
@@ -189,7 +190,7 @@ and the photos in `photos/`. Copies are kept in [`reference/`](reference/README.
 | `tower_drop` | 2.0 (= `lip_h`) | The board's standoffs end level with the front shell's edge ([photos](#screws)); 0 left a 2 mm gap at the seam on the first print | Measured |
 | `lip_wall` | 0.8 | Chosen: the rim's inside is the cavity; 0.8 leaves a 40.7 mm opening | Design choice |
 | `screw_size` | M2 | Heads ~3.8 mm across in the drawing (stock ones are Phillips) | Likely |
-| Tower bore | Ø4.6 | ISO 4762 M2 head (Ø3.8) + `head_clear` 0.6 + `hole_slop` 0.2 | Standard |
+| Tower bore | Ø4.6 | ISO 4762 M2 head (Ø3.8) + `head_clear` 0.6 + `hole_slop` 0.2 (Ø4.4 in the desk-stand heads, `head_clear` 0.4) | Standard |
 
 For reference: the stock unit is 15.0 mm thick; Waveshare's largest recommended cell for the
 stock case is 3.85 × 24 × 28 mm; the stock back label window is 27.6 × 27.6 mm, R1.8.

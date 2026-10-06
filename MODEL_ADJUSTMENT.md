@@ -215,7 +215,7 @@ printed (on its floor): `end` makes the longest box, `flat` the shortest.
 | `lock_spread` | Distance between the two lock screws on each side (0 = one per side, in the middle) | Rarely; 14 keeps them on the flat part of the side |
 | `lock_top_bottom` | One more lock screw in the top and one in the bottom, diagonally opposite so they miss the battery slot | Untick for side screws only |
 | `lock_pad` | How far the thicker pad at each lock screw reaches into a notch in the head's edge, at most `stand_ledge` (1.0; the head presets use 1.1 so the notch matches the wider head) | 0 for no pads (then the screws seat in the 1.1 mm band alone) |
-| `collar_h` | A collar on the head between the box and the front shell (0 = none). The head grows this much taller and, above the box, widens to the case outline; the box doesn't change | To lift the board further above the lock blocks, or to print a coloured band that tells units apart |
+| `collar_h` | A collar on the head between the box and the front shell (0 = none). The head grows this much taller and, above the box, widens to the case outline. On a box it adds the 45° ramp the collar nests on; nothing else about the box changes | To lift the board further above the lock blocks, or to print a coloured band that tells units apart |
 | `collar_chamfer` | Slopes the collar's underside at 45° so it prints without sagging, and gives the box's band a matching ramp (on by default) | Off only for a flat-bottomed collar, which then overhangs about 1.2 mm |
 | `lock_block_join` | Fill between each lock block and its nearest screw tower, up to the block's top (off by default) | On, to get rid of the narrow V between a block and the tower's flare |
 
