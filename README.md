@@ -86,6 +86,7 @@ battery plug's polarity before connecting it, and don't leave it charging unatte
 | `amoled18_back_plate.json` | The versions and the desk stand's parts as OpenSCAD presets |
 | `renders/` | Every image in these guides, and `make_renders.sh` to regenerate them |
 | `photos/` | The real unit |
+| `.github/workflows/release.yml` | Cuts a release with every STL attached: Actions tab → Release → Run workflow |
 | `reference/` | Archived Waveshare drawings, 3D model, schematic and web pages ([reference/README.md](reference/README.md)) |
 | `LICENSE` | CC BY-SA 4.0, below |
 

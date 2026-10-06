@@ -1,0 +1,46 @@
+# Cuts a GitHub release: tags the chosen commit, then publishes a release with every
+# ready-to-print STL attached. Run it from the Actions tab (Release > Run workflow).
+# Notes come from .github/release-notes/<version>.md if that file exists, otherwise GitHub
+# writes them from the commits since the last release.
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version tag to create, e.g. v1.0.0"
+        required: true
+      title:
+        description: "Release title (defaults to the version)"
+        required: false
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check the tag is new
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ inputs.version }}
+        run: |
+          if gh release view "$VERSION" >/dev/null 2>&1; then
+            echo "::error::Release $VERSION already exists"; exit 1
+          fi
+
+      - name: Publish the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ inputs.version }}
+          TITLE: ${{ inputs.title }}
+        run: |
+          notes=".github/release-notes/$VERSION.md"
+          if [ -f "$notes" ]; then note_args=(--notes-file "$notes"); else note_args=(--generate-notes); fi
+          gh release create "$VERSION" ./*.stl \
+            --target "$GITHUB_SHA" \
+            --title "${TITLE:-$VERSION}" \
+            "${note_args[@]}"
