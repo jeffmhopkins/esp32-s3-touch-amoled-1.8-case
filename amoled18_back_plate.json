@@ -33,7 +33,7 @@
             "desk_stand": "true",
             "part": "plate",
             "lip_h": "1.5",
-            "tower_drop": "1.5",
+            "tower_drop": "2.0",
             "pocket_clear": "0.05",
             "lip_slop": "0.05",
             "stock_clear": "3.4",

@@ -388,6 +388,7 @@ if (desk) {
     echo(str("Screen:             leans back ", stand_angle, " degrees from upright, USB-C and buttons on its top edge"));
     echo(str("Head:               ", head_x, " x ", head_y, " x ", total_h,
              " mm, the same for every box; it sinks into the box's top, its rim standing above"));
+    echo(str("Towers and blocks:  ", body_h - tower_top, " mm below the seam (where the front shell lands); screw seat ", seat, " mm"));
     if (part != "plate") {
         echo(str("Box:                ", band_top_back, " long x ", 2 * p_out_y, " wide x ", box_depth,
                  " tall, lying on its long flat side (", band_top_front, " mm along its top)"));
@@ -510,11 +511,14 @@ module battery_cavity() {
     }
 }
 
+// Each flare stops at its tower's top, so a lowered tower isn't left with a ring of
+// flare standing above it.
 module tower_flares() {
+    fh = min(flare, tower_top - plate_t);
     if (flare > 0.05)
         for (sx = [-1, 1], sy = [-1, 1])
             translate([sx * screw_dx, sy * screw_dy, plate_t - eps])
-                cylinder(r1 = tower_r + flare, r2 = tower_r, h = flare + eps);
+                cylinder(r1 = tower_r + flare, r2 = tower_r + flare - fh, h = fh + eps);
 }
 
 module screw_holes() {
@@ -669,16 +673,19 @@ module lock_pad_shape(grow, top) {
 // Points +z inward from an edge whose outward direction is o.
 module inward(o) { rotate(o[1] != 0 ? [o[1] * 90, 0, 0] : [0, -o[0] * 90, 0]) children(); }
 
-// A solid block inside the head's edge for each lock screw to bite into.
+// A solid block inside the head's edge for each lock screw to bite into. It reaches
+// under the board, so it stops no higher than the towers: if the towers are lowered to
+// clear the board's standoffs, the blocks drop with them.
+lock_block_top = min(body_h, tower_top);
 module lock_blocks() {
     for (p = lock_pts) {
         l = lock_len + 0.8 - (p[3] != 0 ? head_y - cav_y : head_x - cav_x) / 2;
         if (p[3] != 0)
             translate([p[0] - 3, p[3] > 0 ? cav_y / 2 - l : -cav_y / 2 - eps, plate_t - eps])
-                cube([6, l + eps, body_h - plate_t + eps]);
+                cube([6, l + eps, lock_block_top - plate_t + eps]);
         else
             translate([p[2] > 0 ? cav_x / 2 - l : -cav_x / 2 - eps, p[1] - 3, plate_t - eps])
-                cube([l + eps, 6, body_h - plate_t + eps]);
+                cube([l + eps, 6, lock_block_top - plate_t + eps]);
     }
 }
 
