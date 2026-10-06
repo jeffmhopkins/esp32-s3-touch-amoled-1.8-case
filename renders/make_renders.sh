@@ -52,8 +52,8 @@ echo "Desk stand (as it sits on the table: box on its long flat side, screen fac
 B1="Desk stand: box for 103035 on edge"
 B2="Desk stand: box for 802525 flat"
 B3="Desk stand: box for 104050 on end (tight, measure first)"
-# The head drawn on the boxes is the recommended one, with the collar ("Desk stand: head,
-# Allan fitment with collar"); the boxes themselves are the same with either head.
+# The head drawn on the boxes is the one that ships, with the collar (the same values as the
+# preset "Desk stand: head (fits every box)"); the boxes are the same with either head.
 HEAD="-D lip_h=1.5 -D tower_drop=2.0 -D pocket_clear=0.05 -D lip_slop=0.05 -D stock_clear=3.4 -D stand_ledge=1.1 -D lock_pad=1.1 -D lock_block_join=true -D collar_h=3"
 sec="--projection=o --imgsize=900,700"
 run stand-back.png src/fig_stand.scad --imgsize=900,700 --camera=35,0,25,55,0,35,240 -p "$PRESETS" -P "$B1" -D 'view="exploded"' $HEAD
@@ -80,7 +80,7 @@ run allan-fitment-gaps-after.png src/fig_allan_fitment.scad $ad -p "$PRESETS" -P
 at="--projection=o --imgsize=1400,1000 --camera=0,-14.6,4.6,90,0,90,38"
 run allan-towers-before.png src/fig_allan_towers.scad $at -p "$PRESETS" -P "$B1" -D 'title="Before: towers at the seam"'
 run allan-towers-after.png src/fig_allan_towers.scad $at -p "$PRESETS" -P "$B1" -D 'title="After: towers 0.5 mm down"' $FIX
-H="Desk stand: head, Allan fitment with collar"
+H="Desk stand: head (fits every box)"
 run allan-collar-assembled.png src/fig_stand.scad --imgsize=900,700 --camera=35,0,25,55,0,35,200 -p "$PRESETS" -P "$H" -D 'view="assembled"' -D 'head_color="DarkOrange"'
 run allan-collar-exploded.png src/fig_stand.scad --imgsize=900,700 --camera=35,0,25,55,0,35,260 -p "$PRESETS" -P "$H" -D 'view="exploded"' -D 'head_color="DarkOrange"'
 run allan-collar-cut.png src/fig_allan_towers.scad --projection=o --imgsize=1400,1100 --camera=0,-15.0,6.3,90,0,90,44 -p "$PRESETS" -P "$H" -D 'title="With the collar"'

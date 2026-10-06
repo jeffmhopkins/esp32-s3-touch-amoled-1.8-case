@@ -27,22 +27,6 @@
         },
         "Desk stand: head (fits every box)": {
             "desk_stand": "true",
-            "part": "plate"
-        },
-        "Desk stand: head, Allan fitment (snug)": {
-            "desk_stand": "true",
-            "part": "plate",
-            "lip_h": "1.5",
-            "tower_drop": "2.0",
-            "pocket_clear": "0.05",
-            "lip_slop": "0.05",
-            "stock_clear": "3.4",
-            "stand_ledge": "1.1",
-            "lock_pad": "1.1",
-            "lock_block_join": "true"
-        },
-        "Desk stand: head, Allan fitment with collar": {
-            "desk_stand": "true",
             "part": "plate",
             "lip_h": "1.5",
             "tower_drop": "2.0",
@@ -52,6 +36,18 @@
             "stand_ledge": "1.1",
             "lock_pad": "1.1",
             "collar_h": "3",
+            "lock_block_join": "true"
+        },
+        "Desk stand: head, no collar": {
+            "desk_stand": "true",
+            "part": "plate",
+            "lip_h": "1.5",
+            "tower_drop": "2.0",
+            "pocket_clear": "0.05",
+            "lip_slop": "0.05",
+            "stock_clear": "3.4",
+            "stand_ledge": "1.1",
+            "lock_pad": "1.1",
             "lock_block_join": "true"
         },
         "Desk stand: box for 103035 on edge": {

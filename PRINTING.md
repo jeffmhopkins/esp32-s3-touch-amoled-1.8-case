@@ -96,9 +96,9 @@ The two-part version ([README](README.md#or-the-desk-stand)). Parts are the same
 
 | Part | Notes |
 |---|---|
-| **Head** | `amoled18_stand_head_allan_fitment_collar.stl`: one, whatever the battery. Its collar shows between the box and the display, so print it in a colour of its own if you want to tell units apart |
+| **Head** | `amoled18_stand_head.stl`: one, whatever the battery. Its collar shows between the box and the display, so print it in a colour of its own if you want to tell units apart |
 | **Box** | `amoled18_stand_box_<battery>.stl`, for your battery |
-| **4 × M2 × 5 socket head screws** | Display to head. A 1.5 mm hex key reaches down the 4 mm holes. (The original head, `amoled18_stand_head.stl`, takes M2 × 4) |
+| **4 × M2 × 5 socket head screws** | Display to head. A 1.5 mm hex key reaches down the 4 mm holes. (The head without a collar, `amoled18_stand_head_no_collar.stl`, takes M2 × 4) |
 | **6 × M2 × 8 countersunk (flat head) screws** | Head to box: two on each side, one in the top, one in the bottom. DIN 965 (Phillips) or DIN 7991 (hex). Their heads sit flush in the box's countersunk holes, and they cut their own thread in the head. Shorter than 8 mm won't bite enough |
 | No plugs | The head's back is hidden inside the box |
 

@@ -2,14 +2,16 @@
 
 ## What to print
 
-The collar head is now the recommended desk-stand head for everyone (see the
-[README](README.md#or-the-desk-stand)). There are two versions. Pick one, and keep the box you
-already have.
+What came out of this is now the desk-stand head everyone prints (see the
+[README](README.md#or-the-desk-stand)): `amoled18_stand_head.stl` has the collar, and
+`amoled18_stand_head_no_collar.stl` is the same head without it. Pick one, and keep the box you
+already have. (The stock head these replace is in the repo's history, and the model's defaults
+still build it.)
 
 | Version | Print | Notes |
 |---|---|---|
-| **With collar** | [`amoled18_stand_head_allan_fitment_collar.stl`](amoled18_stand_head_allan_fitment_collar.stl) | The head is 3 mm taller. Above the box it widens to the case outline, so a 3 mm band of it shows between the box and the display. The lock blocks sit 3 mm under where the board's standoffs land. Print the head in a different colour for each unit to tell them apart |
-| **Without collar** | [`amoled18_stand_head_allan_fitment.stl`](amoled18_stand_head_allan_fitment.stl) | Same height as the stock head. The tower tops and lock blocks sit 0.5 mm under where the standoffs land, and the display screws clamp on 0.9 mm of plastic instead of 2 mm |
+| **With collar** | [`amoled18_stand_head.stl`](amoled18_stand_head.stl) | The head is 3 mm taller. Above the box it widens to the case outline, so a 3 mm band of it shows between the box and the display. The lock blocks sit 3 mm under where the board's standoffs land. Print the head in a different colour for each unit to tell them apart |
+| **Without collar** | [`amoled18_stand_head_no_collar.stl`](amoled18_stand_head_no_collar.stl) | Same height as the stock head. The tower tops and lock blocks sit 0.5 mm under where the standoffs land, and the display screws clamp on 0.9 mm of plastic instead of 2 mm |
 
 The display screws are M2 × 5 for the collar head and M2 × 4 for the head without a
 collar; the console's `SCREWS` line gives the length for whichever you export. Both heads
@@ -98,9 +100,9 @@ tower top, and the lock block's top is at the seam too. On the right (after), bo
 
 ## 3. The fix
 
-New preset **Desk stand: head, Allan fitment (snug)** in
-[`amoled18_back_plate.json`](amoled18_back_plate.json). It starts from
-**Desk stand: head (fits every box)** and changes these values:
+The presets **Desk stand: head (fits every box)** (with the collar) and **Desk stand: head, no
+collar** in [`amoled18_back_plate.json`](amoled18_back_plate.json). They start from the
+model's defaults, which built the stock head, and change these values:
 
 | Parameter | Stock | Allan fitment | What it does |
 |---|---|---|---|
@@ -215,18 +217,17 @@ the box:
 ![Assembled](renders/allan-collar-assembled.png)
 
 The collar's height is `collar_h` in the model (0 = no collar), set in the preset **Desk
-stand: head, Allan fitment with collar**.
+stand: head (fits every box)**.
 The box is the same at any collar height.
 
 ## Files
 
 | File | What it is |
 |---|---|
-| [`amoled18_stand_head_allan_fitment.stl`](amoled18_stand_head_allan_fitment.stl) | The head without a collar (preset **Desk stand: head, Allan fitment (snug)**). It fits every stand box |
-| [`amoled18_stand_head_allan_fitment_collar.stl`](amoled18_stand_head_allan_fitment_collar.stl) | The head with its collar (preset **Desk stand: head, Allan fitment with collar**). It fits every stand box |
-| [`amoled18_back_plate.json`](amoled18_back_plate.json) | Preset **Desk stand: head, Allan fitment (snug)** |
+| [`amoled18_stand_head.stl`](amoled18_stand_head.stl) | The head with its collar (preset **Desk stand: head (fits every box)**). It fits every stand box |
+| [`amoled18_stand_head_no_collar.stl`](amoled18_stand_head_no_collar.stl) | The head without a collar (preset **Desk stand: head, no collar**). It fits every stand box |
+| [`amoled18_back_plate.json`](amoled18_back_plate.json) | The two head presets |
 | [`amoled18_back_plate.scad`](amoled18_back_plate.scad) | The model. New: `collar_h`; the lock blocks and tower flares stop at the tower tops. Every other preset comes out the same |
-| [`amoled18_stand_head.stl`](amoled18_stand_head.stl) | The original head, for comparison |
 | [`renders/allan-fitment-before.png`](renders/allan-fitment-before.png), [`-trap.png`](renders/allan-fitment-trap.png), [`-after.png`](renders/allan-fitment-after.png), [`-compare.png`](renders/allan-fitment-compare.png) | The side-wall cuts |
 | [`renders/allan-collar-exploded.png`](renders/allan-collar-exploded.png), [`-assembled.png`](renders/allan-collar-assembled.png), [`-cut.png`](renders/allan-collar-cut.png) | The collar |
 | [`renders/allan-towers-compare.png`](renders/allan-towers-compare.png) ([before](renders/allan-towers-before.png), [after](renders/allan-towers-after.png)) | The cut through a tower and a lock block |
@@ -240,10 +241,10 @@ In OpenSCAD's Customizer pick the preset, set `smoothness` to 96, then F6 and ex
 Or from the command line:
 
 ```
-openscad -o amoled18_stand_head_allan_fitment.stl -p amoled18_back_plate.json \
-  -P "Desk stand: head, Allan fitment (snug)" -D smoothness=96 amoled18_back_plate.scad
-openscad -o amoled18_stand_head_allan_fitment_collar.stl -p amoled18_back_plate.json \
-  -P "Desk stand: head, Allan fitment with collar" -D smoothness=96 amoled18_back_plate.scad
+openscad -o amoled18_stand_head.stl -p amoled18_back_plate.json \
+  -P "Desk stand: head (fits every box)" -D smoothness=96 amoled18_back_plate.scad
+openscad -o amoled18_stand_head_no_collar.stl -p amoled18_back_plate.json \
+  -P "Desk stand: head, no collar" -D smoothness=96 amoled18_back_plate.scad
 ```
 
 Don't scale the old STL instead. Scaling stretches the screw holes and towers too.

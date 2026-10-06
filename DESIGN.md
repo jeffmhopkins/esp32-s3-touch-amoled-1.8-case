@@ -88,8 +88,9 @@ the hex driver needs a 60 mm shaft.
 ![The desk stand from the side](renders/fig-stand-side.png)
 
 Two parts, so the box stays a plain box and the part that meets the display stays the stock
-cover's shape. The recommended head adds a collar and a few fit changes to what's described
-below; see [The collar head](#the-collar-head) at the end of this section.
+cover's shape. The head that ships adds a collar and a few fit changes to what's described
+below (the model's defaults, which the boxes are built from); see
+[The collar head](#the-collar-head) at the end of this section.
 
 - **The head** is the plate at stock depth (5.5 mm) with no battery room: same rim, same four
   towers, so it fits the front shell exactly as the stock cover does. It is smaller than the case
@@ -141,8 +142,9 @@ below; see [The collar head](#the-collar-head) at the end of this section.
 
 ### The collar head
 
-The recommended head (`amoled18_stand_head_allan_fitment_collar.stl`, preset **Desk stand:
-head, Allan fitment with collar**) is the head above with these changes. Each one came from
+The head that ships (`amoled18_stand_head.stl`, preset **Desk stand: head (fits every box)**)
+is the head above with these changes; `amoled18_stand_head_no_collar.stl` (preset **Desk
+stand: head, no collar**) has all of them but the collar. Each one came from
 fitting a stand on a second unit; [ALLAN_FITMENT.md](ALLAN_FITMENT.md) has the story and the
 before and after cuts.
 

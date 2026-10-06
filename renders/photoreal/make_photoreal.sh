@@ -51,8 +51,9 @@ export_part() {  # <shot> <preset> <which> [extra openscad args]
 }
 PLATE="103035 1000mAh on edge (default)"
 STAND="Desk stand: box for 103035 on edge"
-# The stand's head is the recommended one, with the collar ("Desk stand: head, Allan fitment
-# with collar"); the box is the same with either head, so it comes from the box preset alone.
+# The stand's head is the one that ships, with the collar (the same values as the preset
+# "Desk stand: head (fits every box)"); the box is the same with either head, so it comes
+# from the box preset alone.
 HEAD=(-D lip_h=1.5 -D tower_drop=2.0 -D pocket_clear=0.05 -D lip_slop=0.05 -D stock_clear=3.4
       -D stand_ledge=1.1 -D lock_pad=1.1 -D lock_block_join=true -D collar_h=3)
 for w in plate marker_plate shell buttons; do export_part plate "$PLATE" $w & done
