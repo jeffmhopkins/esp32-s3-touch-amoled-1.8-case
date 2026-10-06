@@ -194,6 +194,7 @@ printed (on its floor): `end` makes the longest box, `flat` the shortest.
 | `lock_top_bottom` | One more lock screw in the top and one in the bottom, diagonally opposite so they miss the battery slot | Untick for side screws only |
 | `lock_pad` | How far the thicker pad at each lock screw reaches into a notch in the head's edge, at most `stand_ledge` (1.0) | 0 for no pads (then the screws seat in the 1.1 mm band alone) |
 | `collar_h` | A collar on the head between the box and the front shell (0 = none). The head grows this much taller and, above the box, widens to the case outline; the box doesn't change | To lift the board further above the lock blocks, or to print a coloured band that tells units apart |
+| `lock_block_join` | Fill between each lock block and its nearest screw tower, up to the block's top (off by default) | On, to get rid of the narrow V between a block and the tower's flare |
 
 The head can't shrink past its own rim, so `pocket_wall` + `pocket_clear` together can't go above
 1.35; the console stops with `RIM IS LARGER THAN THE HEAD` if they do. The box's outside is always

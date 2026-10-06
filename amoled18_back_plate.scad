@@ -220,6 +220,9 @@ lock_pad = 1.0;         // [0:0.1:2]
 // band flush with the box and the front shell. The box doesn't change. Print the head
 // in any colour to tell units apart.
 collar_h = 0;           // [0:0.5:8]
+// Fill between each lock block and its nearest screw tower, up to the block's top, so
+// there's no narrow V between the block and the tower's flare
+lock_block_join = false;
 
 
 /* [6. Output] */
@@ -697,14 +700,30 @@ module inward(o) { rotate(o[1] != 0 ? [o[1] * 90, 0, 0] : [0, -o[0] * 90, 0]) ch
 lock_block_top = min(pocket_h, tower_top);
 module lock_blocks() {
     for (p = lock_pts) {
-        l = lock_len + 0.8 - (p[3] != 0 ? head_y - cav_y : head_x - cav_x) / 2;
-        if (p[3] != 0)
-            translate([p[0] - 3, p[3] > 0 ? cav_y / 2 - l : -cav_y / 2 - eps, plate_t - eps])
-                cube([6, l + eps, lock_block_top - plate_t + eps]);
-        else
-            translate([p[2] > 0 ? cav_x / 2 - l : -cav_x / 2 - eps, p[1] - 3, plate_t - eps])
-                cube([l + eps, 6, lock_block_top - plate_t + eps]);
+        // The nearest tower: on a side (y) edge, the one on that side toward the block's
+        // x; on an end (x) edge, the one on that end toward its y.
+        tx = (p[3] != 0 ? sign(p[0]) : p[2]) * screw_dx;
+        ty = (p[3] != 0 ? p[3] : sign(p[1])) * screw_dy;
+        // Trimmed to the head's outline: a tower's full circle reaches past the edge.
+        intersection() {
+            hull() {
+                lock_block(p);
+                if (lock_block_join)
+                    translate([tx, ty, plate_t - eps]) cylinder(r = tower_r, h = lock_block_top - plate_t + eps);
+            }
+            translate([0, 0, -eps]) rbox(head_x, head_y, body_h + 2 * eps, head_r);
+        }
     }
+}
+
+module lock_block(p) {
+    l = lock_len + 0.8 - (p[3] != 0 ? head_y - cav_y : head_x - cav_x) / 2;
+    if (p[3] != 0)
+        translate([p[0] - 3, p[3] > 0 ? cav_y / 2 - l : -cav_y / 2 - eps, plate_t - eps])
+            cube([6, l + eps, lock_block_top - plate_t + eps]);
+    else
+        translate([p[2] > 0 ? cav_x / 2 - l : -cav_x / 2 - eps, p[1] - 3, plate_t - eps])
+            cube([l + eps, 6, lock_block_top - plate_t + eps]);
 }
 
 module head_holes() {

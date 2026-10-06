@@ -107,15 +107,21 @@ New preset **Desk stand: head, Allan fitment (snug)** in
 | `lip_slop` | 0.15 | 0.05 | Rim-to-shell gap each side |
 | `lock_pad`, `stand_ledge` | 1.0 | 1.1 | Makes the head's lock-screw notches 0.1 mm deeper (see below) |
 | `collar_h` | 0 | 0, or 3 with collar | Adds the collar and makes the head 3 mm taller (see section 5) |
+| `lock_block_join` | false | true | Joins each lock block to its nearest screw tower (see below) |
 
 `pocket_wall` stays at 1.1. Neither gap is 0.
 
-There are also two changes to the model, [`amoled18_back_plate.scad`](amoled18_back_plate.scad).
-Neither one changes the stock head or any other preset:
+There are also three changes to the model, [`amoled18_back_plate.scad`](amoled18_back_plate.scad).
+None of them changes the stock head or any other preset:
 
 - **The lock blocks stop no higher than the tower tops.** They used to end at the seam,
   whatever the towers did. Now they drop with the towers, so nothing under the board
   stands higher than the towers do.
+- **New option `lock_block_join`, on in both Allan presets.** It fills the space between
+  each lock block and its nearest screw tower, up to the block's top. That removes the
+  narrow V that was left between the block and the tower's 45° flare, which is hard to
+  print cleanly and weak. The fill is trimmed to the head's outline, so it keeps the same
+  0.05 mm gap to the box.
 - **The 45° flare at the foot of each tower stops at the tower's top.** The flare is
   2 mm tall. With the towers lowered, it would have left a ring standing at the seam
   around each tower.
