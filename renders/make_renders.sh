@@ -65,7 +65,7 @@ run stand-print-bed.png src/fig_stand_print.scad --imgsize=1000,700 --camera=-15
 
 echo "Allan fitment (stock head vs the snug head, in the unchanged 103035 box)"
 openscad -o src/allan_box_slice.stl -p "$PRESETS" -P "$B1" src/fig_allan_box_slice.scad 2>&1 | grep -iE "warning|error" || true
-FIX="-D lip_h=1.5 -D tower_drop=1.5 -D pocket_clear=0.05 -D lip_slop=0.05 -D stock_clear=3.4"
+FIX="-D lip_h=1.5 -D tower_drop=1.5 -D pocket_clear=0.05 -D lip_slop=0.05 -D stock_clear=3.4 -D stand_ledge=1.1 -D lock_pad=1.1"
 TRAP="-D lip_h=1.5 -D tower_drop=1.5 -D pocket_clear=0.05 -D lip_slop=0.05"
 af="--projection=o --imgsize=1400,1000 --camera=0,20.2,4.0,90,0,90,38"
 ad="--projection=o --imgsize=1000,1000 --camera=0,21.45,3.6,90,0,90,6"

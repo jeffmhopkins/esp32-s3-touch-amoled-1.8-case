@@ -1,7 +1,19 @@
 # Allan fitment: a snugger desk-stand head
 
-The fix is a new head, [`amoled18_stand_head_allan_fitment.stl`](amoled18_stand_head_allan_fitment.stl).
-**The box is unchanged.** Reprint the head and keep the box you already have.
+## What to print
+
+**Only the head:** [`amoled18_stand_head_allan_fitment.stl`](amoled18_stand_head_allan_fitment.stl).
+Keep the box you already have. The box STLs are unchanged, and the one head fits all three:
+
+| Battery | Box (unchanged, reprint not needed) |
+|---|---|
+| 103035 1000 mAh on edge | [`amoled18_stand_box_103035_edge.stl`](amoled18_stand_box_103035_edge.stl) |
+| 802525 400 mAh flat | [`amoled18_stand_box_802525_flat.stl`](amoled18_stand_box_802525_flat.stl) |
+| 104050 2400 mAh on end | [`amoled18_stand_box_104050_end.stl`](amoled18_stand_box_104050_end.stl) |
+
+The new head was checked against each of these three box STLs in its seated position: it
+doesn't overlap any of them anywhere. Its back rests on the box's ledge, the same as the
+stock head. The screws are unchanged too.
 
 ## 1. The problem
 
@@ -47,7 +59,7 @@ each side), enough to feel. The red bar on the right is the
 
 New preset **Desk stand: head, Allan fitment (snug)** in
 [`amoled18_back_plate.json`](amoled18_back_plate.json). It starts from
-**Desk stand: head (fits every box)** and changes five values:
+**Desk stand: head (fits every box)** and changes these values:
 
 | Parameter | Stock | Allan fitment | What it does |
 |---|---|---|---|
@@ -56,8 +68,19 @@ New preset **Desk stand: head, Allan fitment (snug)** in
 | `stock_clear` | 3.9 | 3.4 | Keeps the head's body 3.5 mm tall, the depth of the box's pocket (see below) |
 | `pocket_clear` | 0.15 | 0.05 | Head-to-box gap each side. Makes the head bigger; the box opening stays the same |
 | `lip_slop` | 0.15 | 0.05 | Rim-to-shell gap each side |
+| `lock_pad`, `stand_ledge` | 1.0 | 1.1 | Makes the head's lock-screw notches 0.1 mm deeper (see below) |
 
 `pocket_wall` stays at 1.1. Neither gap is 0.
+
+### Why the notches get deeper
+
+The box has a pad on its inside at each of the six lock screws, and the head has a notch
+in its edge that the pad sits in. The notch depth is measured from the head's edge, so
+when the head grew 0.1 mm each side, its notches moved out with it. The 103035 and 802525
+boxes have 1.0 mm pads, and those pads would then press 0.05 mm into the head. Setting
+`lock_pad` and `stand_ledge` to 1.1 makes each notch 0.1 mm deeper, which leaves 0.05 mm
+clear around every pad. When you export the head, these two values only set the notch
+depth. The boxes are not changed.
 
 ### Why `stock_clear` changes too
 
