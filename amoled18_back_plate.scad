@@ -215,9 +215,10 @@ lock_top_bottom = true;
 // How far the thicker pad at each lock screw reaches into a notch in the head, at most
 // stand_ledge (0 = no pads)
 lock_pad = 1.0;         // [0:0.1:2]
-// A separate ring between the box and the front shell (0 = none). The head grows this
-// much taller and passes up through it; the box doesn't change. Print the ring in any
-// colour to tell units apart.
+// A collar on the head between the box and the front shell (0 = none): the head grows
+// this much taller, and above the box it widens to the case outline, so it shows as a
+// band flush with the box and the front shell. The box doesn't change. Print the head
+// in any colour to tell units apart.
 collar_h = 0;           // [0:0.5:8]
 
 
@@ -226,8 +227,8 @@ collar_h = 0;           // [0:0.5:8]
 // Curve smoothness. 48 previews fast, 96 is export quality.
 smoothness = 72;    // [24:8:144]
 // What to output: the plate (the head, for a desk stand), the hole plugs, both side
-// by side, the desk stand's box, its collar, or the desk stand assembled (preview only)
-part = "plate";     // [plate, plugs, both, box, collar, stand]
+// by side, the desk stand's box, or the desk stand assembled (preview only)
+part = "plate";     // [plate, plugs, both, box, stand]
 // Show a ghost of the battery to check placement (preview only)
 show_battery = false;
 
@@ -296,15 +297,15 @@ cav_y = rim_in_y;
 cav_r = rim_in_r;
 
 stack_t     = cell_h + tape_t + foam_t + lead_space + extra_clearance;
-desk        = desk_stand || part == "box" || part == "collar" || part == "stand";
+desk        = desk_stand || part == "box" || part == "stand";
 // In a desk stand the battery lives in the box, so the head is stock depth.
 inner_clear = desk ? stock_clear + collar_h : max(stock_clear, stack_t);
 // The rim is part of the cavity's depth, so the body only makes up the rest.
 spacer_h    = max(0, inner_clear - lip_h);
 body_h      = plate_t + spacer_h;
 total_h     = body_h + lip_h;
-// The part of a desk head that sits in the box (the rest passes through the collar).
-// The box is built to this, so a collar doesn't change it.
+// The part of a desk head that sits in the box (the collar is above it). The box is
+// built to this, so a collar doesn't change it.
 pocket_h    = desk ? body_h - collar_h : body_h;
 extra_depth = total_h - plate_t - stock_clear;
 
@@ -398,8 +399,8 @@ if (desk) {
     echo(str("Towers:             tops ", body_h - tower_top, " mm below the seam (where the front shell lands); screw seat ", seat, " mm"));
     echo(str("Lock blocks:        tops ", body_h - lock_block_top, " mm below the seam"));
     if (collar_h > 0)
-        echo(str("Collar:             ", plate_x, " x ", plate_y, " x ", collar_h,
-                 " mm ring between the box and the front shell (part = collar)"));
+        echo(str("Collar:             ", collar_h, " mm, part of the head: ", plate_x, " x ", plate_y,
+                 " mm, flush between the box and the front shell"));
     if (part != "plate") {
         echo(str("Box:                ", band_top_back, " long x ", 2 * p_out_y, " wide x ", box_depth,
                  " tall, lying on its long flat side (", band_top_front, " mm along its top)"));
@@ -491,6 +492,11 @@ module solid_body() {
         }
     else
         rbox(head_x, head_y, body_h, head_r);
+
+    // The collar: above the box's band the head widens to the case outline, so it sits
+    // on the band and the front shell sits on it, flush with both.
+    if (desk && collar_h > 0)
+        translate([0, 0, pocket_h]) rbox(plate_x, plate_y, collar_h, plate_r);
 
     if (lip_h > 0.05)
         translate([0, 0, body_h - eps])
@@ -725,7 +731,9 @@ module back_plate() {
         }
         screw_holes();
         if (desk) head_holes();
-        if (desk && lock_pad > 0) lock_pad_shape(pocket_clear, pocket_h);
+        // With a collar the notch stops just short of its underside, so they don't share
+        // an edge (the box's pad is 0.2 lower still).
+        if (desk && lock_pad > 0) lock_pad_shape(pocket_clear, collar_h > 0 ? pocket_h - 0.05 : pocket_h);
     }
 }
 
@@ -778,12 +786,6 @@ module pocket_ring_2d() {
         rrect(plate_x, plate_y, plate_r);
         rrect(head_x + 2 * pocket_clear, head_y + 2 * pocket_clear, head_r + pocket_clear);
     }
-}
-
-// The collar: the band's outline carried on above the box, as a separate ring the head
-// passes through. It sits on the band and the front shell sits on it. Printed flat.
-module collar() {
-    if (collar_h > 0) linear_extrude(height = collar_h) pocket_ring_2d();
 }
 
 // The band round the box's angled end: stands on the head's plane around the head, as tall as
@@ -865,12 +867,7 @@ module stand_head_pose() { multmatrix(m_head) rotate([0, 0, 180]) children(); }
 
 if (show_part) {
     if (part == "box") stand_box();
-    if (part == "collar") collar();
-    if (part == "stand") stand_pose() {
-        stand_box();
-        stand_head_pose() back_plate();
-        if (collar_h > 0) multmatrix(m_head) translate([0, 0, pocket_h]) collar();
-    }
+    if (part == "stand") stand_pose() { stand_box(); stand_head_pose() back_plate(); }
     if (part == "plate" || part == "both") back_plate();
     if (part == "plugs" || part == "both")
         translate([part == "both" ? plate_x/2 + 6 : 0, 0, 0]) plugs();

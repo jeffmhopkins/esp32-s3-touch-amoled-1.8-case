@@ -17,11 +17,9 @@ good = "DarkGreen"; bad = "Red";
 drop = seam - tower_top;
 proud = 0.5;   // illustrative: a standoff that ends this far past the shell's edge
 
-color("LightSteelBlue") render() slice() back_plate();
-// The box's band beside the head, and the collar on it if there is one (both are the
-// same ring outline, so they're drawn straight from it).
+color(collar_h > 0 ? "DarkOrange" : "LightSteelBlue") render() slice() back_plate();
+// The box's band beside the head, drawn straight from its outline.
 color("SteelBlue") render() slice() translate([0, 0, -1]) linear_extrude(height = pocket_h + 1) pocket_ring_2d();
-if (collar_h > 0) color("DarkOrange") render() slice() translate([0, 0, pocket_h]) collar();
 
 // Seam line across the cut
 color("Black") translate([cut_x, -23, seam - 0.02]) cube([0.1, 19, 0.04]);
@@ -38,12 +36,12 @@ else
     callout([x, -screw_dy, seam + 1.8], [x, -20.6, seam + 2.6], "brass standoff", v, t * 0.85, "right", c = "DarkGoldenrod");
 
 label([x, -13.8, seam + 6.1], title, v, 0.5, "center");
-label([x, -11, 1.0], "lock block", v, t * 0.85, c = "SlateGray");
-label([x, -18, 1.0], "tower", v, t * 0.85, c = "SlateGray");
+label([x, -11, 1.0], "lock block", v, t * 0.85, c = collar_h > 0 ? "SaddleBrown" : "SlateGray");
+label([x, -18, 1.0], "tower", v, t * 0.85, c = collar_h > 0 ? "SaddleBrown" : "SlateGray");
 
 if (collar_h > 0) {
     label([x, -22.9, pocket_h + collar_h / 2 + 0.3], str("collar ", collar_h, " mm"), v, t * 0.85, "right", c = "DarkOrange");
-    label([x, -22.9, pocket_h + collar_h / 2 - 0.3], "(any colour)", v, t * 0.75, "right", c = "DarkOrange");
+    label([x, -22.9, pocket_h + collar_h / 2 - 0.3], "(part of the head)", v, t * 0.75, "right", c = "DarkOrange");
     label([x, -22.9, pocket_h / 2], "box", v, t * 0.85, "right", c = "SteelBlue");
     dim([x, -6.2, lock_block_top], [x, -6.2, seam], "", view = v, c = good);
     label([x, -6.6, (lock_block_top + seam) / 2], str("lock blocks ", seam - lock_block_top, " mm below"), v, t * 0.75, "right", c = good);

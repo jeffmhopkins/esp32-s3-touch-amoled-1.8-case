@@ -78,7 +78,7 @@ battery plug's polarity before connecting it, and don't leave it charging unatte
 | `back_plate_*.stl` | Ready-to-print plates, one per version |
 | `amoled18_hole_plugs.stl` | Six press-fit plugs |
 | `amoled18_stand_head.stl`, `amoled18_stand_box_*.stl` | The desk stand: one head, a box per battery |
-| `amoled18_stand_head_allan_fitment*.stl`, `amoled18_stand_collar_allan_fitment.stl` | A snugger desk-stand head for the same boxes, without a collar or with a 3 mm collar ring (print the collar in any colour to tell units apart). See [ALLAN_FITMENT.md](ALLAN_FITMENT.md) |
+| `amoled18_stand_head_allan_fitment*.stl` | A snugger desk-stand head for the same boxes, without a collar or with a built-in 3 mm collar (print it in any colour to tell units apart). See [ALLAN_FITMENT.md](ALLAN_FITMENT.md) |
 | `amoled18_back_plate.scad` | The adjustable model ([MODEL_ADJUSTMENT.md](MODEL_ADJUSTMENT.md)) |
 | `amoled18_back_plate.json` | The versions and the desk stand's parts as OpenSCAD presets |
 | `renders/` | Every image in these guides, and `make_renders.sh` to regenerate them |

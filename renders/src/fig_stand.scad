@@ -7,7 +7,7 @@ view = "assembled";
 front_h = 11.5;   // front shell + display above the head's seam (stock unit is 15 mm)
 cut_y = 0;
 lift = view == "exploded" ? 25 : 0;
-collar_color = "DarkOrange";
+head_color = "LightSteelBlue";
 
 // Keeps only the half beyond the cut in a section; render() keeps the colour.
 module cut(c, a = 1) {
@@ -36,12 +36,9 @@ color("Gainsboro") translate([-5, -40, -1]) cube([95, 80, 1]);
 stand_pose() {
     cut("SteelBlue") stand_box();
     stand_head_pose() translate([0, 0, lift]) {
-        cut("LightSteelBlue") back_plate();
+        cut(head_color) back_plate();
         display_unit();
     }
-    // The collar, if any, sits on the box's band (halfway up when exploded).
-    if (collar_h > 0)
-        multmatrix(m_head) translate([0, 0, pocket_h + lift / 2]) cut(collar_color) collar();
     if (view != "exploded") {
         cut("Crimson") translate([cell_x0, -fy/2, box_floor]) cube([fx, cell_y, tape_t]);
         cut("LimeGreen") translate([cell_x0, -fy/2, box_floor + tape_t]) cube([fx, cell_y, cell_h]);
