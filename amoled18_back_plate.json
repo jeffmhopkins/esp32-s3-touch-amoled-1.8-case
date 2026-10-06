@@ -29,6 +29,15 @@
             "desk_stand": "true",
             "part": "plate"
         },
+        "Desk stand: head, Allan fitment (snug)": {
+            "desk_stand": "true",
+            "part": "plate",
+            "lip_h": "1.5",
+            "tower_drop": "1.5",
+            "pocket_clear": "0.05",
+            "lip_slop": "0.05",
+            "stock_clear": "3.4"
+        },
         "Desk stand: box for 103035 on edge": {
             "battery_t": "10",
             "battery_w": "30",
